@@ -54,7 +54,7 @@
 			buttonSpeak.Location = new Point(384, 184);
 			buttonSpeak.Name = "buttonSpeak";
 			buttonSpeak.Size = new Size(77, 38);
-			buttonSpeak.TabIndex = 1;
+			buttonSpeak.TabIndex = 5;
 			buttonSpeak.Text = "Speak";
 			buttonSpeak.UseVisualStyleBackColor = true;
 			buttonSpeak.Click += ButtonSpeak_Click;
@@ -76,7 +76,7 @@
 			labelVolume.Location = new Point(12, 196);
 			labelVolume.Name = "labelVolume";
 			labelVolume.Size = new Size(50, 15);
-			labelVolume.TabIndex = 3;
+			labelVolume.TabIndex = 1;
 			labelVolume.Text = "volume:";
 			// 
 			// labelSpeechRate
@@ -85,7 +85,7 @@
 			labelSpeechRate.Location = new Point(191, 196);
 			labelSpeechRate.Name = "labelSpeechRate";
 			labelSpeechRate.Size = new Size(70, 15);
-			labelSpeechRate.TabIndex = 5;
+			labelSpeechRate.TabIndex = 3;
 			labelSpeechRate.Text = "speech rate:";
 			// 
 			// trackBarSpeechRate
