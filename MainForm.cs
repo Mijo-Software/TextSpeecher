@@ -37,5 +37,37 @@ namespace TextSpeecher
 				_ = textBox.Focus();
 			}
 		}
+
+		// Event handler for the form load event
+		private void MainForm_Load(object sender, EventArgs e)
+		{
+			// Set focus to the TextBox when the form loads
+			_ = textBox.Focus();
+			// Set the initial volume of the synthesizer and the track bar
+			trackBarVolume.Value = synthesizer.Volume;
+			// Update the volume label to show the current volume
+			labelVolume.Text = $"Volume: {synthesizer.Volume}";
+			// Set the initial speech rate of the synthesizer and the track bar
+			trackBarSpeechRate.Value = synthesizer.Rate;
+			// Update the speech rate label to show the current rate
+			labelSpeechRate.Text = $"Speech Rate: {synthesizer.Rate}";
+		}
+
+		// Event handler for the volume track bar scroll event
+		private void TrackBarVolume_Scroll(object sender, EventArgs e)
+		{
+			// Update the synthesizer volume based on the track bar value
+			synthesizer.Volume = trackBarVolume.Value;
+			// Update the volume label to show the current volume
+			labelVolume.Text = $"Volume: {synthesizer.Volume}";
+		}
+
+		private void TrackBarSpeechRate_Scroll(object sender, EventArgs e)
+		{
+			// Update the synthesizer speech rate based on the track bar value
+			synthesizer.Rate = trackBarSpeechRate.Value;
+			// Update the speech rate label to show the current rate
+			labelSpeechRate.Text = $"Speech Rate: {synthesizer.Rate}";
+		}
 	}
 }
