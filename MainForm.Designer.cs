@@ -28,8 +28,16 @@
 		/// </summary>
 		private void InitializeComponent()
 		{
+			components = new System.ComponentModel.Container();
 			textBox = new TextBox();
 			buttonSpeak = new Button();
+			trackBarVolume = new TrackBar();
+			labelVolume = new Label();
+			labelSpeechRate = new Label();
+			trackBarSpeechRate = new TrackBar();
+			toolTip = new ToolTip(components);
+			((System.ComponentModel.ISupportInitialize)trackBarVolume).BeginInit();
+			((System.ComponentModel.ISupportInitialize)trackBarSpeechRate).BeginInit();
 			SuspendLayout();
 			// 
 			// textBox
@@ -43,19 +51,64 @@
 			// 
 			// buttonSpeak
 			// 
-			buttonSpeak.Location = new Point(199, 184);
+			buttonSpeak.Location = new Point(384, 184);
 			buttonSpeak.Name = "buttonSpeak";
-			buttonSpeak.Size = new Size(75, 38);
+			buttonSpeak.Size = new Size(77, 38);
 			buttonSpeak.TabIndex = 1;
-			buttonSpeak.Text = "Sprechen";
+			buttonSpeak.Text = "Speak";
 			buttonSpeak.UseVisualStyleBackColor = true;
 			buttonSpeak.Click += ButtonSpeak_Click;
+			// 
+			// trackBarVolume
+			// 
+			trackBarVolume.Location = new Point(79, 184);
+			trackBarVolume.Maximum = 100;
+			trackBarVolume.Name = "trackBarVolume";
+			trackBarVolume.Size = new Size(106, 45);
+			trackBarVolume.TabIndex = 2;
+			trackBarVolume.TickFrequency = 5;
+			trackBarVolume.TickStyle = TickStyle.Both;
+			trackBarVolume.Scroll += TrackBarVolume_Scroll;
+			// 
+			// labelVolume
+			// 
+			labelVolume.AutoSize = true;
+			labelVolume.Location = new Point(12, 196);
+			labelVolume.Name = "labelVolume";
+			labelVolume.Size = new Size(50, 15);
+			labelVolume.TabIndex = 3;
+			labelVolume.Text = "volume:";
+			// 
+			// labelSpeechRate
+			// 
+			labelSpeechRate.AutoSize = true;
+			labelSpeechRate.Location = new Point(191, 196);
+			labelSpeechRate.Name = "labelSpeechRate";
+			labelSpeechRate.Size = new Size(70, 15);
+			labelSpeechRate.TabIndex = 5;
+			labelSpeechRate.Text = "speech rate:";
+			// 
+			// trackBarSpeechRate
+			// 
+			trackBarSpeechRate.LargeChange = 2;
+			trackBarSpeechRate.Location = new Point(275, 184);
+			trackBarSpeechRate.Minimum = -10;
+			trackBarSpeechRate.Name = "trackBarSpeechRate";
+			trackBarSpeechRate.Size = new Size(110, 45);
+			trackBarSpeechRate.TabIndex = 4;
+			trackBarSpeechRate.TickFrequency = 2;
+			trackBarSpeechRate.TickStyle = TickStyle.Both;
+			trackBarSpeechRate.Scroll += TrackBarSpeechRate_Scroll;
 			// 
 			// MainForm
 			// 
 			AutoScaleDimensions = new SizeF(7F, 15F);
 			AutoScaleMode = AutoScaleMode.Font;
 			ClientSize = new Size(473, 232);
+			Controls.Add(labelSpeechRate);
+			Controls.Add(trackBarSpeechRate);
+			Controls.Add(labelVolume);
+			Controls.Add(trackBarVolume);
 			Controls.Add(buttonSpeak);
 			Controls.Add(textBox);
 			FormBorderStyle = FormBorderStyle.FixedSingle;
@@ -63,6 +116,9 @@
 			Name = "MainForm";
 			StartPosition = FormStartPosition.CenterScreen;
 			Text = "TextSpeecher";
+			Load += MainForm_Load;
+			((System.ComponentModel.ISupportInitialize)trackBarVolume).EndInit();
+			((System.ComponentModel.ISupportInitialize)trackBarSpeechRate).EndInit();
 			ResumeLayout(false);
 			PerformLayout();
 		}
@@ -71,5 +127,10 @@
 
 		private TextBox textBox;
 		private Button buttonSpeak;
+		private TrackBar trackBarVolume;
+		private Label labelVolume;
+		private Label labelSpeechRate;
+		private TrackBar trackBarSpeechRate;
+		private ToolTip toolTip;
 	}
 }
