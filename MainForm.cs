@@ -7,7 +7,7 @@ namespace TextSpeecher
 	public partial class MainForm : Form
 	{
 		// Declare a SpeechSynthesizer instance
-		private readonly SpeechSynthesizer synthesizer;
+		private readonly SpeechSynthesizer? synthesizer;
 
 		// Method to load installed voices into the ListBox
 		private void LoadInstalledVoicesToListBox()
@@ -59,6 +59,13 @@ namespace TextSpeecher
 			InitializeComponent();
 			// Create a new instance of the SpeechSynthesizer
 			synthesizer = new SpeechSynthesizer();
+
+			// Attach event handlers for the synthesizer events
+			synthesizer.SpeakStarted += Synthesizer_SpeakStarted;
+			synthesizer.StateChanged += Synthesizer_StateChanged;
+			synthesizer.SpeakProgress += Synthesizer_SpeakProgress;
+			synthesizer.SpeakCompleted += Synthesizer_SpeakCompleted;
+
 			// Load installed voices into the ListBox
 			LoadInstalledVoicesToListBox();
 			// Set the initial voice to the first one in the list if available
@@ -78,9 +85,72 @@ namespace TextSpeecher
 			}
 		}
 
+		private void Synthesizer_SpeakStarted(object? sender, SpeakStartedEventArgs e)
+		{
+			// Disable the Speak button and enable Pause and Stop buttons when speaking starts
+			buttonSpeak.Enabled = false;
+			buttonPause.Enabled = true;
+			buttonStop.Enabled = true;
+		}
+
+		private void Synthesizer_StateChanged(object? sender, StateChangedEventArgs e)
+		{
+			// Check if the synthesizer instance is null
+			if (synthesizer == null)
+			{
+				// Show a message box if the synthesizer instance is null
+				_ = MessageBox.Show(text: "The SpeechSynthesizer instance is not initialized.", caption: "Error", buttons: MessageBoxButtons.OK, icon: MessageBoxIcon.Error);
+				return;
+			}
+			// Update button states based on the current state of the synthesizer
+			switch (e.State)
+			{
+				// Handle different states of the synthesizer
+				case SynthesizerState.Ready:
+					// When ready, enable Speak button and disable Pause and Stop buttons
+					buttonSpeak.Enabled = true;
+					buttonPause.Enabled = false;
+					buttonStop.Enabled = false;
+					break;
+				case SynthesizerState.Speaking:
+					// When speaking, disable Speak button and enable Pause and Stop buttons
+					buttonSpeak.Enabled = false;
+					buttonPause.Enabled = true;
+					buttonStop.Enabled = true;
+					break;
+				case SynthesizerState.Paused:
+					// When paused, disable Speak button, enable Pause button, and disable Stop button
+					buttonSpeak.Enabled = false;
+					buttonPause.Enabled = true;
+					buttonStop.Enabled = false;
+					break;
+				default:
+					// For any other state, enable Speak button and disable Pause and Stop buttons
+					buttonSpeak.Enabled = true;
+					buttonPause.Enabled = false;
+					buttonStop.Enabled = false;
+					break;
+			}
+		}
+
+		private void Synthesizer_SpeakProgress(object? sender, SpeakProgressEventArgs e)
+		{
+			// Optionally, you can update a status label or log the progress
+			// For example, you could display the current word being spoken
+			// labelStatus.Text = $"Speaking: {e.Text}";
+		}
+
+		private void Synthesizer_SpeakCompleted(object? sender, SpeakCompletedEventArgs e)
+		{
+		}
+
 		// Event handler for the form load event
 		private void MainForm_Load(object sender, EventArgs e)
 		{
+			// Disable the Pause and Stop buttons initially
+			buttonPause.Enabled = false;
+			buttonStop.Enabled = false;
+
 			// Set focus to the TextBox when the form loads
 			_ = textBox.Focus();
 			// Set the initial volume of the synthesizer and the track bar
@@ -129,6 +199,34 @@ namespace TextSpeecher
 			synthesizer.Rate = trackBarSpeechRate.Value;
 			// Update the speech rate label to show the current rate
 			labelSpeechRate.Text = $"Speech Rate: {synthesizer.Rate}";
+		}
+
+		private void ButtonPause_Click(object sender, EventArgs e)
+		{
+			// Check the current state of the synthesizer
+			// and toggle between pause and resume
+			// based on the current state
+			if (synthesizer.State == SynthesizerState.Speaking)
+			{
+				// Pause the speech synthesis
+				synthesizer.Pause();
+				buttonPause.Text = "Resume";
+			}
+			else if (synthesizer.State == SynthesizerState.Paused)
+			{
+				// Resume the speech synthesis
+				synthesizer.Resume();
+				buttonPause.Text = "Pause";
+			}
+		}
+
+		private void ButtonStop_Click(object sender, EventArgs e)
+		{
+			// Stop the speech synthesis
+			synthesizer.SpeakAsyncCancelAll();
+			buttonSpeak.Enabled = true;
+			buttonPause.Enabled = false;
+			buttonStop.Enabled = false;
 		}
 	}
 }

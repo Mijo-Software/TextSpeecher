@@ -38,6 +38,8 @@
 			toolTip = new ToolTip(components);
 			listBoxVoices = new ListBox();
 			labelComputerVoice = new Label();
+			buttonPause = new Button();
+			buttonStop = new Button();
 			((System.ComponentModel.ISupportInitialize)trackBarVolume).BeginInit();
 			((System.ComponentModel.ISupportInitialize)trackBarSpeechRate).BeginInit();
 			SuspendLayout();
@@ -48,12 +50,13 @@
 			textBox.Multiline = true;
 			textBox.Name = "textBox";
 			textBox.PlaceholderText = "Please enter text to speak.";
-			textBox.Size = new Size(310, 166);
+			textBox.ScrollBars = ScrollBars.Vertical;
+			textBox.Size = new Size(302, 166);
 			textBox.TabIndex = 0;
 			// 
 			// buttonSpeak
 			// 
-			buttonSpeak.Location = new Point(414, 182);
+			buttonSpeak.Location = new Point(20, 369);
 			buttonSpeak.Name = "buttonSpeak";
 			buttonSpeak.Size = new Size(85, 38);
 			buttonSpeak.TabIndex = 5;
@@ -63,7 +66,7 @@
 			// 
 			// trackBarVolume
 			// 
-			trackBarVolume.Location = new Point(81, 184);
+			trackBarVolume.Location = new Point(189, 208);
 			trackBarVolume.Maximum = 100;
 			trackBarVolume.Name = "trackBarVolume";
 			trackBarVolume.Size = new Size(125, 45);
@@ -75,7 +78,7 @@
 			// labelVolume
 			// 
 			labelVolume.AutoSize = true;
-			labelVolume.Location = new Point(12, 196);
+			labelVolume.Location = new Point(189, 190);
 			labelVolume.Name = "labelVolume";
 			labelVolume.Size = new Size(50, 15);
 			labelVolume.TabIndex = 1;
@@ -84,7 +87,7 @@
 			// labelSpeechRate
 			// 
 			labelSpeechRate.AutoSize = true;
-			labelSpeechRate.Location = new Point(212, 196);
+			labelSpeechRate.Location = new Point(189, 256);
 			labelSpeechRate.Name = "labelSpeechRate";
 			labelSpeechRate.Size = new Size(70, 15);
 			labelSpeechRate.TabIndex = 3;
@@ -93,10 +96,10 @@
 			// trackBarSpeechRate
 			// 
 			trackBarSpeechRate.LargeChange = 2;
-			trackBarSpeechRate.Location = new Point(298, 184);
+			trackBarSpeechRate.Location = new Point(189, 274);
 			trackBarSpeechRate.Minimum = -10;
 			trackBarSpeechRate.Name = "trackBarSpeechRate";
-			trackBarSpeechRate.Size = new Size(110, 45);
+			trackBarSpeechRate.Size = new Size(125, 45);
 			trackBarSpeechRate.TabIndex = 4;
 			trackBarSpeechRate.TickFrequency = 2;
 			trackBarSpeechRate.TickStyle = TickStyle.Both;
@@ -105,7 +108,7 @@
 			// listBoxVoices
 			// 
 			listBoxVoices.FormattingEnabled = true;
-			listBoxVoices.Location = new Point(328, 39);
+			listBoxVoices.Location = new Point(12, 214);
 			listBoxVoices.Name = "listBoxVoices";
 			listBoxVoices.Size = new Size(171, 139);
 			listBoxVoices.TabIndex = 6;
@@ -113,17 +116,39 @@
 			// labelComputerVoice
 			// 
 			labelComputerVoice.AutoSize = true;
-			labelComputerVoice.Location = new Point(328, 15);
+			labelComputerVoice.Location = new Point(12, 190);
 			labelComputerVoice.Name = "labelComputerVoice";
 			labelComputerVoice.Size = new Size(93, 15);
 			labelComputerVoice.TabIndex = 7;
 			labelComputerVoice.Text = "computer voice:";
 			// 
+			// buttonPause
+			// 
+			buttonPause.Location = new Point(111, 369);
+			buttonPause.Name = "buttonPause";
+			buttonPause.Size = new Size(85, 38);
+			buttonPause.TabIndex = 8;
+			buttonPause.Text = "Pause";
+			buttonPause.UseVisualStyleBackColor = true;
+			buttonPause.Click += ButtonPause_Click;
+			// 
+			// buttonStop
+			// 
+			buttonStop.Location = new Point(202, 369);
+			buttonStop.Name = "buttonStop";
+			buttonStop.Size = new Size(85, 38);
+			buttonStop.TabIndex = 9;
+			buttonStop.Text = "Stop";
+			buttonStop.UseVisualStyleBackColor = true;
+			buttonStop.Click += ButtonStop_Click;
+			// 
 			// MainForm
 			// 
 			AutoScaleDimensions = new SizeF(7F, 15F);
 			AutoScaleMode = AutoScaleMode.Font;
-			ClientSize = new Size(511, 232);
+			ClientSize = new Size(330, 422);
+			Controls.Add(buttonStop);
+			Controls.Add(buttonPause);
 			Controls.Add(labelComputerVoice);
 			Controls.Add(listBoxVoices);
 			Controls.Add(labelSpeechRate);
@@ -155,5 +180,7 @@
 		private ToolTip toolTip;
 		private ListBox listBoxVoices;
 		private Label labelComputerVoice;
+		private Button buttonPause;
+		private Button buttonStop;
 	}
 }
