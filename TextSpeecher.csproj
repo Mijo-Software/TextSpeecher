@@ -10,6 +10,16 @@
     <GenerateDocumentationFile>True</GenerateDocumentationFile>
     <Version>0.3.1.5</Version>
     <ApplicationIcon>TextSpeecher_logo.ico</ApplicationIcon>
+    <Title>TextSpeecher</Title>
+    <Description>TextSpeecher is a small program that reads text aloud.
+
+</Description>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+    <PackageIcon>TextSpeecher_logo.ico</PackageIcon>
+    <Copyright>Mijo Software</Copyright>
+    <PackageProjectUrl>https://github.com/Mijo-Software/TextSpeecher</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/Mijo-Software/TextSpeecher</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
@@ -28,6 +38,17 @@
 
   <ItemGroup>
     <PackageReference Include="System.Speech" Version="9.0.8" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="README.md">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
+    <None Update="TextSpeecher_logo.ico">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
   </ItemGroup>
 
 </Project>
