@@ -40,6 +40,7 @@
 			listBoxVoices = new ListBox();
 			buttonPause = new Button();
 			buttonStop = new Button();
+			buttonShowVoiceInfo = new Button();
 			labelComputerVoice = new Label();
 			((System.ComponentModel.ISupportInitialize)trackBarVolume).BeginInit();
 			((System.ComponentModel.ISupportInitialize)trackBarSpeechRate).BeginInit();
@@ -68,7 +69,7 @@
 			buttonSpeak.Location = new Point(20, 359);
 			buttonSpeak.Name = "buttonSpeak";
 			buttonSpeak.Size = new Size(85, 51);
-			buttonSpeak.TabIndex = 7;
+			buttonSpeak.TabIndex = 8;
 			buttonSpeak.Text = "Speak";
 			buttonSpeak.TextImageRelation = TextImageRelation.ImageBeforeText;
 			toolTip.SetToolTip(buttonSpeak, "Speak");
@@ -84,7 +85,7 @@
 			trackBarVolume.Maximum = 100;
 			trackBarVolume.Name = "trackBarVolume";
 			trackBarVolume.Size = new Size(125, 45);
-			trackBarVolume.TabIndex = 4;
+			trackBarVolume.TabIndex = 5;
 			trackBarVolume.TickFrequency = 5;
 			trackBarVolume.TickStyle = TickStyle.Both;
 			toolTip.SetToolTip(trackBarVolume, "volume");
@@ -99,7 +100,7 @@
 			labelVolume.Location = new Point(189, 190);
 			labelVolume.Name = "labelVolume";
 			labelVolume.Size = new Size(50, 15);
-			labelVolume.TabIndex = 3;
+			labelVolume.TabIndex = 4;
 			labelVolume.Text = "volume:";
 			// 
 			// labelSpeechRate
@@ -111,7 +112,7 @@
 			labelSpeechRate.Location = new Point(189, 256);
 			labelSpeechRate.Name = "labelSpeechRate";
 			labelSpeechRate.Size = new Size(70, 15);
-			labelSpeechRate.TabIndex = 5;
+			labelSpeechRate.TabIndex = 6;
 			labelSpeechRate.Text = "speech rate:";
 			// 
 			// trackBarSpeechRate
@@ -124,7 +125,7 @@
 			trackBarSpeechRate.Minimum = -10;
 			trackBarSpeechRate.Name = "trackBarSpeechRate";
 			trackBarSpeechRate.Size = new Size(125, 45);
-			trackBarSpeechRate.TabIndex = 6;
+			trackBarSpeechRate.TabIndex = 7;
 			trackBarSpeechRate.TickFrequency = 2;
 			trackBarSpeechRate.TickStyle = TickStyle.Both;
 			toolTip.SetToolTip(trackBarSpeechRate, "speech rate");
@@ -151,7 +152,7 @@
 			buttonPause.Location = new Point(111, 359);
 			buttonPause.Name = "buttonPause";
 			buttonPause.Size = new Size(97, 51);
-			buttonPause.TabIndex = 8;
+			buttonPause.TabIndex = 9;
 			buttonPause.Text = "Pause";
 			buttonPause.TextImageRelation = TextImageRelation.ImageBeforeText;
 			toolTip.SetToolTip(buttonPause, "Pause/Resume");
@@ -167,12 +168,26 @@
 			buttonStop.Location = new Point(214, 359);
 			buttonStop.Name = "buttonStop";
 			buttonStop.Size = new Size(85, 51);
-			buttonStop.TabIndex = 9;
+			buttonStop.TabIndex = 10;
 			buttonStop.Text = "Stop";
 			buttonStop.TextImageRelation = TextImageRelation.ImageBeforeText;
 			toolTip.SetToolTip(buttonStop, "Stop");
 			buttonStop.UseVisualStyleBackColor = true;
 			buttonStop.Click += ButtonStop_Click;
+			// 
+			// buttonShowVoiceInfo
+			// 
+			buttonShowVoiceInfo.AccessibleDescription = "Show the voice info";
+			buttonShowVoiceInfo.AccessibleName = "voice info";
+			buttonShowVoiceInfo.AccessibleRole = AccessibleRole.PushButton;
+			buttonShowVoiceInfo.Location = new Point(124, 184);
+			buttonShowVoiceInfo.Name = "buttonShowVoiceInfo";
+			buttonShowVoiceInfo.Size = new Size(59, 23);
+			buttonShowVoiceInfo.TabIndex = 3;
+			buttonShowVoiceInfo.Text = "info";
+			toolTip.SetToolTip(buttonShowVoiceInfo, "voice info");
+			buttonShowVoiceInfo.UseVisualStyleBackColor = true;
+			buttonShowVoiceInfo.Click += ButtonShowVoiceInfo_Click;
 			// 
 			// labelComputerVoice
 			// 
@@ -194,6 +209,7 @@
 			AutoScaleDimensions = new SizeF(7F, 15F);
 			AutoScaleMode = AutoScaleMode.Font;
 			ClientSize = new Size(330, 422);
+			Controls.Add(buttonShowVoiceInfo);
 			Controls.Add(buttonStop);
 			Controls.Add(buttonPause);
 			Controls.Add(labelComputerVoice);
@@ -230,5 +246,6 @@
 		private Label labelComputerVoice;
 		private Button buttonPause;
 		private Button buttonStop;
+		private Button buttonShowVoiceInfo;
 	}
 }
