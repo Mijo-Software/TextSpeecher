@@ -69,7 +69,8 @@
 			buttonSpeak.AccessibleName = "Speak button";
 			buttonSpeak.AccessibleRole = AccessibleRole.PushButton;
 			buttonSpeak.Image = Properties.Resources.control_play_blue;
-			buttonSpeak.Location = new Point(20, 359);
+			buttonSpeak.ImageAlign = ContentAlignment.MiddleRight;
+			buttonSpeak.Location = new Point(26, 347);
 			buttonSpeak.Name = "buttonSpeak";
 			buttonSpeak.Size = new Size(85, 51);
 			buttonSpeak.TabIndex = 8;
@@ -142,7 +143,7 @@
 			listBoxVoices.FormattingEnabled = true;
 			listBoxVoices.Location = new Point(12, 214);
 			listBoxVoices.Name = "listBoxVoices";
-			listBoxVoices.Size = new Size(171, 139);
+			listBoxVoices.Size = new Size(171, 94);
 			listBoxVoices.TabIndex = 2;
 			toolTip.SetToolTip(listBoxVoices, "List of installed comuter voices");
 			// 
@@ -152,7 +153,8 @@
 			buttonPause.AccessibleName = "Pause/resume button";
 			buttonPause.AccessibleRole = AccessibleRole.PushButton;
 			buttonPause.Image = Properties.Resources.control_pause_blue;
-			buttonPause.Location = new Point(111, 359);
+			buttonPause.ImageAlign = ContentAlignment.MiddleRight;
+			buttonPause.Location = new Point(117, 347);
 			buttonPause.Name = "buttonPause";
 			buttonPause.Size = new Size(97, 51);
 			buttonPause.TabIndex = 9;
@@ -168,7 +170,8 @@
 			buttonStop.AccessibleName = "Stop";
 			buttonStop.AccessibleRole = AccessibleRole.PushButton;
 			buttonStop.Image = Properties.Resources.control_stop_blue;
-			buttonStop.Location = new Point(214, 359);
+			buttonStop.ImageAlign = ContentAlignment.MiddleRight;
+			buttonStop.Location = new Point(220, 347);
 			buttonStop.Name = "buttonStop";
 			buttonStop.Size = new Size(85, 51);
 			buttonStop.TabIndex = 10;
@@ -183,11 +186,14 @@
 			buttonShowVoiceInfo.AccessibleDescription = "Show the voice info";
 			buttonShowVoiceInfo.AccessibleName = "voice info";
 			buttonShowVoiceInfo.AccessibleRole = AccessibleRole.PushButton;
-			buttonShowVoiceInfo.Location = new Point(124, 184);
+			buttonShowVoiceInfo.Image = Properties.Resources.information;
+			buttonShowVoiceInfo.ImageAlign = ContentAlignment.MiddleRight;
+			buttonShowVoiceInfo.Location = new Point(12, 314);
 			buttonShowVoiceInfo.Name = "buttonShowVoiceInfo";
-			buttonShowVoiceInfo.Size = new Size(59, 23);
+			buttonShowVoiceInfo.Size = new Size(171, 27);
 			buttonShowVoiceInfo.TabIndex = 3;
-			buttonShowVoiceInfo.Text = "info";
+			buttonShowVoiceInfo.Text = "Voice Info";
+			buttonShowVoiceInfo.TextImageRelation = TextImageRelation.ImageBeforeText;
 			toolTip.SetToolTip(buttonShowVoiceInfo, "voice info");
 			buttonShowVoiceInfo.UseVisualStyleBackColor = true;
 			buttonShowVoiceInfo.Click += ButtonShowVoiceInfo_Click;
@@ -200,9 +206,9 @@
 			labelComputerVoice.AutoSize = true;
 			labelComputerVoice.Location = new Point(12, 190);
 			labelComputerVoice.Name = "labelComputerVoice";
-			labelComputerVoice.Size = new Size(106, 15);
+			labelComputerVoice.Size = new Size(157, 15);
 			labelComputerVoice.TabIndex = 1;
-			labelComputerVoice.Text = "computer voice(s):";
+			labelComputerVoice.Text = "Installed Computer Coice(s):";
 			// 
 			// statusStrip
 			// 
@@ -210,7 +216,7 @@
 			statusStrip.AllowClickThrough = true;
 			statusStrip.AllowItemReorder = true;
 			statusStrip.Items.AddRange(new ToolStripItem[] { labelStatus });
-			statusStrip.Location = new Point(0, 421);
+			statusStrip.Location = new Point(0, 409);
 			statusStrip.Name = "statusStrip";
 			statusStrip.RenderMode = ToolStripRenderMode.ManagerRenderMode;
 			statusStrip.ShowItemToolTips = true;
@@ -238,7 +244,7 @@
 			AccessibleRole = AccessibleRole.Window;
 			AutoScaleDimensions = new SizeF(7F, 15F);
 			AutoScaleMode = AutoScaleMode.Font;
-			ClientSize = new Size(330, 443);
+			ClientSize = new Size(330, 431);
 			Controls.Add(statusStrip);
 			Controls.Add(buttonShowVoiceInfo);
 			Controls.Add(buttonStop);
