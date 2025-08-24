@@ -150,7 +150,7 @@ namespace TextSpeecher
 		private void Synthesizer_SpeakProgress(object? sender, SpeakProgressEventArgs e)
 		{
 			// Update the status label with the current speaking text and character info
-			labelStatus.Text = $"Speaking: {e.Text}, Char count: {e.CharacterCount}, Char position: {e.CharacterPosition}";
+			labelStatus.Text = $"Speaking: {e.Text}, Char Count: {e.CharacterCount}, Char Position: {e.CharacterPosition}";
 		}
 
 		// Event handler for the SpeakCompleted event
