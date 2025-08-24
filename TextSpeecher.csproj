@@ -9,6 +9,7 @@
     <StartupObject>TextSpeecher.Program</StartupObject>
     <GenerateDocumentationFile>True</GenerateDocumentationFile>
     <Version>0.3.1.5</Version>
+    <ApplicationIcon>TextSpeecher_logo.ico</ApplicationIcon>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
@@ -20,6 +21,10 @@
     <WarningLevel>9999</WarningLevel>
     <CheckForOverflowUnderflow>True</CheckForOverflowUnderflow>
   </PropertyGroup>
+
+  <ItemGroup>
+    <Content Include="TextSpeecher_logo.ico" />
+  </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="System.Speech" Version="9.0.8" />

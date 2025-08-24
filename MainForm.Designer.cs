@@ -29,6 +29,7 @@
 		private void InitializeComponent()
 		{
 			components = new System.ComponentModel.Container();
+			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
 			textBox = new TextBox();
 			buttonSpeak = new Button();
 			trackBarVolume = new TrackBar();
@@ -158,6 +159,7 @@
 			Controls.Add(buttonSpeak);
 			Controls.Add(textBox);
 			FormBorderStyle = FormBorderStyle.FixedSingle;
+			Icon = (Icon)resources.GetObject("$this.Icon");
 			MaximizeBox = false;
 			Name = "MainForm";
 			StartPosition = FormStartPosition.CenterScreen;
