@@ -1,3 +1,4 @@
+using System.Speech.AudioFormat;
 using System.Speech.Synthesis;
 
 // Import necessary namespaces
@@ -85,10 +86,12 @@ namespace TextSpeecher
 			}
 		}
 
+		// Event handler for the SpeakStarted event
 		private void Synthesizer_SpeakStarted(object? sender, SpeakStartedEventArgs e)
 		{
 		}
 
+		// Event handler for the StateChanged event
 		private void Synthesizer_StateChanged(object? sender, StateChangedEventArgs e)
 		{
 			// Check if the synthesizer instance is null
@@ -141,6 +144,7 @@ namespace TextSpeecher
 			}
 		}
 
+		// Event handler for the SpeakProgress event
 		private void Synthesizer_SpeakProgress(object? sender, SpeakProgressEventArgs e)
 		{
 			// Optionally, you can update a status label or log the progress
@@ -148,6 +152,7 @@ namespace TextSpeecher
 			// labelStatus.Text = $"Speaking: {e.Text}";
 		}
 
+		// Event handler for the SpeakCompleted event
 		private void Synthesizer_SpeakCompleted(object? sender, SpeakCompletedEventArgs e)
 		{
 		}
@@ -209,6 +214,7 @@ namespace TextSpeecher
 			labelSpeechRate.Text = $"Speech Rate: {synthesizer.Rate}";
 		}
 
+		// Event handler for the Pause button click event
 		private void ButtonPause_Click(object sender, EventArgs e)
 		{
 			// Check the current state of the synthesizer
@@ -228,6 +234,7 @@ namespace TextSpeecher
 			}
 		}
 
+		// Event handler for the Stop button click event
 		private void ButtonStop_Click(object sender, EventArgs e)
 		{
 			// Stop the speech synthesis
@@ -235,6 +242,53 @@ namespace TextSpeecher
 			buttonSpeak.Enabled = true;
 			buttonPause.Enabled = false;
 			buttonStop.Enabled = false;
+		}
+
+		// Event handler for the Show Voice Info button click event
+		private void ButtonShowVoiceInfo_Click(object sender, EventArgs e)
+		{
+			// Get the currently selected voice information
+			VoiceInfo? selectedVoiceInfo = synthesizer.Voice;
+			// Display the voice information in a message box
+			if (selectedVoiceInfo != null)
+			{
+				// Prepare the voice details string
+				string AudioFormats = "";
+				// List all supported audio formats
+				foreach (SpeechAudioFormatInfo fmt in selectedVoiceInfo.SupportedAudioFormats)
+				{
+					// Append each audio format to the AudioFormats string
+					AudioFormats += $"{fmt.EncodingFormat}\n";
+				}
+				// Prepare additional info string
+				string AdditionalInfo = "";
+				// List all additional info key-value pairs
+				foreach (string key in selectedVoiceInfo.AdditionalInfo.Keys)
+				{
+					// Append each key-value pair to the AdditionalInfo string
+					AdditionalInfo += string.Format(format: $"  {{0}}: {{1}}\n", arg0: key, arg1: selectedVoiceInfo.AdditionalInfo[key: key]);
+				}
+				// Combine all voice details into a single string
+				string voiceDetails = $"Name: {selectedVoiceInfo.Name}\nID: {selectedVoiceInfo.Id}\nCulture: {selectedVoiceInfo.Culture}\nAge: {selectedVoiceInfo.Age}\nGender: {selectedVoiceInfo.Gender}\nDescription: {selectedVoiceInfo.Description}\nAdditionalInfo: \n{AdditionalInfo}\n";
+				// Check if there are supported audio formats and append accordingly
+				if (selectedVoiceInfo.SupportedAudioFormats.Count != 0)
+				{
+					// Append the audio formats to the voice details
+					voiceDetails += $"Audio Formats:\n{AudioFormats}";
+				}
+				else
+				{
+					// Indicate that there are no audio formats available
+					voiceDetails += "Audio Formats: None\n";
+				}
+				// Show the voice details in a message box
+				_ = MessageBox.Show(text: voiceDetails, caption: "Voice Info", buttons: MessageBoxButtons.OK, icon: MessageBoxIcon.Information);
+			}
+			else
+			{
+				// Show a message box if no voice is currently selected
+				_ = MessageBox.Show(text: "No voice is currently selected.", caption: "Voice Info", buttons: MessageBoxButtons.OK, icon: MessageBoxIcon.Information);
+			}
 		}
 	}
 }
