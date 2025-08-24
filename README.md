@@ -1,4 +1,4 @@
 # TextSpeecher
 TextSpeecher is a small program that reads text aloud.
 ## Screenshot
-<img width="332" height="454" alt="2025-08-24" src="https://github.com/user-attachments/assets/d4fbe292-737c-4652-a1f9-46e397e0cded" />
+<img width="332" height="463" alt="2025-08-24" src="https://github.com/user-attachments/assets/e33b3457-8376-44ee-b70c-f1913d7cdc0e" />
