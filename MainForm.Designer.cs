@@ -47,6 +47,9 @@
 			// 
 			// textBox
 			// 
+			textBox.AccessibleDescription = "Enter text to speak";
+			textBox.AccessibleName = "text box to speak";
+			textBox.AccessibleRole = AccessibleRole.Text;
 			textBox.Location = new Point(12, 12);
 			textBox.Multiline = true;
 			textBox.Name = "textBox";
@@ -54,97 +57,134 @@
 			textBox.ScrollBars = ScrollBars.Vertical;
 			textBox.Size = new Size(302, 166);
 			textBox.TabIndex = 0;
+			textBox.Text = "Text to speak";
 			// 
 			// buttonSpeak
 			// 
+			buttonSpeak.AccessibleDescription = "Speak the text";
+			buttonSpeak.AccessibleName = "Speak button";
+			buttonSpeak.AccessibleRole = AccessibleRole.PushButton;
 			buttonSpeak.Location = new Point(20, 369);
 			buttonSpeak.Name = "buttonSpeak";
 			buttonSpeak.Size = new Size(85, 38);
-			buttonSpeak.TabIndex = 5;
+			buttonSpeak.TabIndex = 7;
 			buttonSpeak.Text = "Speak";
+			toolTip.SetToolTip(buttonSpeak, "Speak");
 			buttonSpeak.UseVisualStyleBackColor = true;
 			buttonSpeak.Click += ButtonSpeak_Click;
 			// 
 			// trackBarVolume
 			// 
+			trackBarVolume.AccessibleDescription = "Set the volume";
+			trackBarVolume.AccessibleName = "volume";
+			trackBarVolume.AccessibleRole = AccessibleRole.Slider;
 			trackBarVolume.Location = new Point(189, 208);
 			trackBarVolume.Maximum = 100;
 			trackBarVolume.Name = "trackBarVolume";
 			trackBarVolume.Size = new Size(125, 45);
-			trackBarVolume.TabIndex = 2;
+			trackBarVolume.TabIndex = 4;
 			trackBarVolume.TickFrequency = 5;
 			trackBarVolume.TickStyle = TickStyle.Both;
+			toolTip.SetToolTip(trackBarVolume, "volume");
 			trackBarVolume.Scroll += TrackBarVolume_Scroll;
 			// 
 			// labelVolume
 			// 
+			labelVolume.AccessibleDescription = "label for the volume";
+			labelVolume.AccessibleName = "volume";
+			labelVolume.AccessibleRole = AccessibleRole.StaticText;
 			labelVolume.AutoSize = true;
 			labelVolume.Location = new Point(189, 190);
 			labelVolume.Name = "labelVolume";
 			labelVolume.Size = new Size(50, 15);
-			labelVolume.TabIndex = 1;
+			labelVolume.TabIndex = 3;
 			labelVolume.Text = "volume:";
 			// 
 			// labelSpeechRate
 			// 
+			labelSpeechRate.AccessibleDescription = "Label for the speech rate";
+			labelSpeechRate.AccessibleName = "speech rate";
+			labelSpeechRate.AccessibleRole = AccessibleRole.StaticText;
 			labelSpeechRate.AutoSize = true;
 			labelSpeechRate.Location = new Point(189, 256);
 			labelSpeechRate.Name = "labelSpeechRate";
 			labelSpeechRate.Size = new Size(70, 15);
-			labelSpeechRate.TabIndex = 3;
+			labelSpeechRate.TabIndex = 5;
 			labelSpeechRate.Text = "speech rate:";
 			// 
 			// trackBarSpeechRate
 			// 
+			trackBarSpeechRate.AccessibleDescription = "Set the speech rate";
+			trackBarSpeechRate.AccessibleName = "speech rate";
+			trackBarSpeechRate.AccessibleRole = AccessibleRole.Slider;
 			trackBarSpeechRate.LargeChange = 2;
 			trackBarSpeechRate.Location = new Point(189, 274);
 			trackBarSpeechRate.Minimum = -10;
 			trackBarSpeechRate.Name = "trackBarSpeechRate";
 			trackBarSpeechRate.Size = new Size(125, 45);
-			trackBarSpeechRate.TabIndex = 4;
+			trackBarSpeechRate.TabIndex = 6;
 			trackBarSpeechRate.TickFrequency = 2;
 			trackBarSpeechRate.TickStyle = TickStyle.Both;
+			toolTip.SetToolTip(trackBarSpeechRate, "speech rate");
 			trackBarSpeechRate.Scroll += TrackBarSpeechRate_Scroll;
 			// 
 			// listBoxVoices
 			// 
+			listBoxVoices.AccessibleDescription = "list with installed computer voices";
+			listBoxVoices.AccessibleName = "computer voices";
+			listBoxVoices.AccessibleRole = AccessibleRole.List;
 			listBoxVoices.FormattingEnabled = true;
 			listBoxVoices.Location = new Point(12, 214);
 			listBoxVoices.Name = "listBoxVoices";
 			listBoxVoices.Size = new Size(171, 139);
-			listBoxVoices.TabIndex = 6;
+			listBoxVoices.TabIndex = 2;
+			toolTip.SetToolTip(listBoxVoices, "List of installed comuter voices");
 			// 
 			// labelComputerVoice
 			// 
+			labelComputerVoice.AccessibleDescription = "label for computer voices";
+			labelComputerVoice.AccessibleName = "computer voices";
+			labelComputerVoice.AccessibleRole = AccessibleRole.StaticText;
 			labelComputerVoice.AutoSize = true;
 			labelComputerVoice.Location = new Point(12, 190);
 			labelComputerVoice.Name = "labelComputerVoice";
 			labelComputerVoice.Size = new Size(106, 15);
-			labelComputerVoice.TabIndex = 7;
+			labelComputerVoice.TabIndex = 1;
 			labelComputerVoice.Text = "computer voice(s):";
 			// 
 			// buttonPause
 			// 
+			buttonPause.AccessibleDescription = "Pause and resume the voice";
+			buttonPause.AccessibleName = "Pause/resume button";
+			buttonPause.AccessibleRole = AccessibleRole.PushButton;
 			buttonPause.Location = new Point(111, 369);
 			buttonPause.Name = "buttonPause";
 			buttonPause.Size = new Size(85, 38);
 			buttonPause.TabIndex = 8;
 			buttonPause.Text = "Pause";
+			toolTip.SetToolTip(buttonPause, "Pause/Resume");
 			buttonPause.UseVisualStyleBackColor = true;
 			buttonPause.Click += ButtonPause_Click;
 			// 
 			// buttonStop
 			// 
+			buttonStop.AccessibleDescription = "Stop the voice";
+			buttonStop.AccessibleName = "Stop";
+			buttonStop.AccessibleRole = AccessibleRole.PushButton;
 			buttonStop.Location = new Point(202, 369);
 			buttonStop.Name = "buttonStop";
 			buttonStop.Size = new Size(85, 38);
 			buttonStop.TabIndex = 9;
 			buttonStop.Text = "Stop";
+			toolTip.SetToolTip(buttonStop, "Stop");
 			buttonStop.UseVisualStyleBackColor = true;
 			buttonStop.Click += ButtonStop_Click;
 			// 
 			// MainForm
 			// 
+			AccessibleDescription = "This is the application window.";
+			AccessibleName = "application window";
+			AccessibleRole = AccessibleRole.Window;
 			AutoScaleDimensions = new SizeF(7F, 15F);
 			AutoScaleMode = AutoScaleMode.Font;
 			ClientSize = new Size(330, 422);
