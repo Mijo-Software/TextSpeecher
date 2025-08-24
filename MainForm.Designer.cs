@@ -42,8 +42,11 @@
 			buttonStop = new Button();
 			buttonShowVoiceInfo = new Button();
 			labelComputerVoice = new Label();
+			statusStrip = new StatusStrip();
+			labelStatus = new ToolStripStatusLabel();
 			((System.ComponentModel.ISupportInitialize)trackBarVolume).BeginInit();
 			((System.ComponentModel.ISupportInitialize)trackBarSpeechRate).BeginInit();
+			statusStrip.SuspendLayout();
 			SuspendLayout();
 			// 
 			// textBox
@@ -201,6 +204,33 @@
 			labelComputerVoice.TabIndex = 1;
 			labelComputerVoice.Text = "computer voice(s):";
 			// 
+			// statusStrip
+			// 
+			statusStrip.AccessibleRole = AccessibleRole.StatusBar;
+			statusStrip.AllowClickThrough = true;
+			statusStrip.AllowItemReorder = true;
+			statusStrip.Items.AddRange(new ToolStripItem[] { labelStatus });
+			statusStrip.Location = new Point(0, 421);
+			statusStrip.Name = "statusStrip";
+			statusStrip.RenderMode = ToolStripRenderMode.ManagerRenderMode;
+			statusStrip.ShowItemToolTips = true;
+			statusStrip.Size = new Size(330, 22);
+			statusStrip.SizingGrip = false;
+			statusStrip.TabIndex = 11;
+			statusStrip.TabStop = true;
+			statusStrip.Text = "statusStrip";
+			// 
+			// labelStatus
+			// 
+			labelStatus.AccessibleDescription = "Show some information";
+			labelStatus.AccessibleName = "information";
+			labelStatus.AccessibleRole = AccessibleRole.StaticText;
+			labelStatus.AutoToolTip = true;
+			labelStatus.Name = "labelStatus";
+			labelStatus.Size = new Size(38, 17);
+			labelStatus.Text = "status";
+			labelStatus.ToolTipText = "Some information";
+			// 
 			// MainForm
 			// 
 			AccessibleDescription = "This is the application window.";
@@ -208,7 +238,8 @@
 			AccessibleRole = AccessibleRole.Window;
 			AutoScaleDimensions = new SizeF(7F, 15F);
 			AutoScaleMode = AutoScaleMode.Font;
-			ClientSize = new Size(330, 422);
+			ClientSize = new Size(330, 443);
+			Controls.Add(statusStrip);
 			Controls.Add(buttonShowVoiceInfo);
 			Controls.Add(buttonStop);
 			Controls.Add(buttonPause);
@@ -229,6 +260,8 @@
 			Load += MainForm_Load;
 			((System.ComponentModel.ISupportInitialize)trackBarVolume).EndInit();
 			((System.ComponentModel.ISupportInitialize)trackBarSpeechRate).EndInit();
+			statusStrip.ResumeLayout(false);
+			statusStrip.PerformLayout();
 			ResumeLayout(false);
 			PerformLayout();
 		}
@@ -247,5 +280,7 @@
 		private Button buttonPause;
 		private Button buttonStop;
 		private Button buttonShowVoiceInfo;
+		private StatusStrip statusStrip;
+		private ToolStripStatusLabel labelStatus;
 	}
 }

@@ -114,6 +114,7 @@ namespace TextSpeecher
 					listBoxVoices.Enabled = true;
 					trackBarVolume.Enabled = true;
 					trackBarSpeechRate.Enabled = true;
+					labelStatus.Text = string.Empty;
 					break;
 				case SynthesizerState.Speaking:
 					// When speaking, disable Speak button and enable Pause and Stop buttons
@@ -140,6 +141,7 @@ namespace TextSpeecher
 					listBoxVoices.Enabled = true;
 					trackBarVolume.Enabled = true;
 					trackBarSpeechRate.Enabled = true;
+					labelStatus.Text = string.Empty;
 					break;
 			}
 		}
@@ -147,9 +149,8 @@ namespace TextSpeecher
 		// Event handler for the SpeakProgress event
 		private void Synthesizer_SpeakProgress(object? sender, SpeakProgressEventArgs e)
 		{
-			// Optionally, you can update a status label or log the progress
-			// For example, you could display the current word being spoken
-			// labelStatus.Text = $"Speaking: {e.Text}";
+			// Update the status label with the current speaking text and character info
+			labelStatus.Text = $"Speaking: {e.Text}, Char count: {e.CharacterCount}, Char position: {e.CharacterPosition}";
 		}
 
 		// Event handler for the SpeakCompleted event
@@ -163,6 +164,9 @@ namespace TextSpeecher
 			// Disable the Pause and Stop buttons initially
 			buttonPause.Enabled = false;
 			buttonStop.Enabled = false;
+
+			// Clear any status messages
+			labelStatus.Text = string.Empty;
 
 			// Set focus to the TextBox when the form loads
 			_ = textBox.Focus();
