@@ -87,10 +87,6 @@ namespace TextSpeecher
 
 		private void Synthesizer_SpeakStarted(object? sender, SpeakStartedEventArgs e)
 		{
-			// Disable the Speak button and enable Pause and Stop buttons when speaking starts
-			buttonSpeak.Enabled = false;
-			buttonPause.Enabled = true;
-			buttonStop.Enabled = true;
 		}
 
 		private void Synthesizer_StateChanged(object? sender, StateChangedEventArgs e)
@@ -108,15 +104,23 @@ namespace TextSpeecher
 				// Handle different states of the synthesizer
 				case SynthesizerState.Ready:
 					// When ready, enable Speak button and disable Pause and Stop buttons
+					// Also enable voice selection and track bars
 					buttonSpeak.Enabled = true;
 					buttonPause.Enabled = false;
 					buttonStop.Enabled = false;
+					listBoxVoices.Enabled = true;
+					trackBarVolume.Enabled = true;
+					trackBarSpeechRate.Enabled = true;
 					break;
 				case SynthesizerState.Speaking:
 					// When speaking, disable Speak button and enable Pause and Stop buttons
+					// Also disable voice selection and track bars
 					buttonSpeak.Enabled = false;
 					buttonPause.Enabled = true;
 					buttonStop.Enabled = true;
+					listBoxVoices.Enabled = false;
+					trackBarVolume.Enabled = false;
+					trackBarSpeechRate.Enabled = false;
 					break;
 				case SynthesizerState.Paused:
 					// When paused, disable Speak button, enable Pause button, and disable Stop button
@@ -126,9 +130,13 @@ namespace TextSpeecher
 					break;
 				default:
 					// For any other state, enable Speak button and disable Pause and Stop buttons
+					// Also enable voice selection and track bars
 					buttonSpeak.Enabled = true;
 					buttonPause.Enabled = false;
 					buttonStop.Enabled = false;
+					listBoxVoices.Enabled = true;
+					trackBarVolume.Enabled = true;
+					trackBarSpeechRate.Enabled = true;
 					break;
 			}
 		}

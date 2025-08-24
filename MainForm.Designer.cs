@@ -118,9 +118,9 @@
 			labelComputerVoice.AutoSize = true;
 			labelComputerVoice.Location = new Point(12, 190);
 			labelComputerVoice.Name = "labelComputerVoice";
-			labelComputerVoice.Size = new Size(93, 15);
+			labelComputerVoice.Size = new Size(106, 15);
 			labelComputerVoice.TabIndex = 7;
-			labelComputerVoice.Text = "computer voice:";
+			labelComputerVoice.Text = "computer voice(s):";
 			// 
 			// buttonPause
 			// 
