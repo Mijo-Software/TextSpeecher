@@ -151,6 +151,9 @@ namespace TextSpeecher
 		{
 			// Update the status label with the current speaking text and character info
 			labelStatus.Text = $"Speaking: {e.Text}, Char Count: {e.CharacterCount}, Char Position: {e.CharacterPosition}";
+			// Set focus to the TextBox and select the current character position
+			_ = textBox.Focus();
+			textBox.Select(start: e.CharacterPosition, length: e.Text.Length);
 		}
 
 		// Event handler for the SpeakCompleted event
