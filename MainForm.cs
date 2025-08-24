@@ -111,20 +111,21 @@ namespace TextSpeecher
 					buttonSpeak.Enabled = true;
 					buttonPause.Enabled = false;
 					buttonStop.Enabled = false;
+					buttonClearText.Enabled = true;
 					listBoxVoices.Enabled = true;
 					trackBarVolume.Enabled = true;
 					trackBarSpeechRate.Enabled = true;
 					labelStatus.Text = string.Empty;
 					break;
 				case SynthesizerState.Speaking:
-					// When speaking, disable Speak button and enable Pause and Stop buttons
+					// When speaking, disable Speak button, enable Pause and Stop buttons
 					// Also disable voice selection and track bars
 					buttonSpeak.Enabled = false;
 					buttonPause.Enabled = true;
 					buttonStop.Enabled = true;
+					buttonClearText.Enabled = false;
 					listBoxVoices.Enabled = false;
 					trackBarVolume.Enabled = false;
-					trackBarSpeechRate.Enabled = false;
 					break;
 				case SynthesizerState.Paused:
 					// When paused, disable Speak button, enable Pause button, and disable Stop button
@@ -138,6 +139,7 @@ namespace TextSpeecher
 					buttonSpeak.Enabled = true;
 					buttonPause.Enabled = false;
 					buttonStop.Enabled = false;
+					buttonClearText.Enabled = true;
 					listBoxVoices.Enabled = true;
 					trackBarVolume.Enabled = true;
 					trackBarSpeechRate.Enabled = true;
@@ -246,9 +248,6 @@ namespace TextSpeecher
 		{
 			// Stop the speech synthesis
 			synthesizer.SpeakAsyncCancelAll();
-			buttonSpeak.Enabled = true;
-			buttonPause.Enabled = false;
-			buttonStop.Enabled = false;
 		}
 
 		// Event handler for the Show Voice Info button click event
@@ -296,6 +295,13 @@ namespace TextSpeecher
 				// Show a message box if no voice is currently selected
 				_ = MessageBox.Show(text: "No voice is currently selected.", caption: "Voice Info", buttons: MessageBoxButtons.OK, icon: MessageBoxIcon.Information);
 			}
+		}
+
+		// Event handler for the Clear Text button click event
+		private void ButtonClearText_Click(object sender, EventArgs e)
+		{
+			// Clear the text in the TextBox
+			textBox.Clear();
 		}
 	}
 }
