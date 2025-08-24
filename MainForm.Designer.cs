@@ -44,6 +44,7 @@
 			labelComputerVoice = new Label();
 			statusStrip = new StatusStrip();
 			labelStatus = new ToolStripStatusLabel();
+			buttonClearText = new Button();
 			((System.ComponentModel.ISupportInitialize)trackBarVolume).BeginInit();
 			((System.ComponentModel.ISupportInitialize)trackBarSpeechRate).BeginInit();
 			statusStrip.SuspendLayout();
@@ -73,7 +74,7 @@
 			buttonSpeak.Location = new Point(26, 347);
 			buttonSpeak.Name = "buttonSpeak";
 			buttonSpeak.Size = new Size(85, 51);
-			buttonSpeak.TabIndex = 8;
+			buttonSpeak.TabIndex = 9;
 			buttonSpeak.Text = "Speak";
 			buttonSpeak.TextImageRelation = TextImageRelation.ImageBeforeText;
 			toolTip.SetToolTip(buttonSpeak, "Speak");
@@ -157,7 +158,7 @@
 			buttonPause.Location = new Point(117, 347);
 			buttonPause.Name = "buttonPause";
 			buttonPause.Size = new Size(97, 51);
-			buttonPause.TabIndex = 9;
+			buttonPause.TabIndex = 10;
 			buttonPause.Text = "Pause";
 			buttonPause.TextImageRelation = TextImageRelation.ImageBeforeText;
 			toolTip.SetToolTip(buttonPause, "Pause/Resume");
@@ -174,7 +175,7 @@
 			buttonStop.Location = new Point(220, 347);
 			buttonStop.Name = "buttonStop";
 			buttonStop.Size = new Size(85, 51);
-			buttonStop.TabIndex = 10;
+			buttonStop.TabIndex = 11;
 			buttonStop.Text = "Stop";
 			buttonStop.TextImageRelation = TextImageRelation.ImageBeforeText;
 			toolTip.SetToolTip(buttonStop, "Stop");
@@ -222,7 +223,7 @@
 			statusStrip.ShowItemToolTips = true;
 			statusStrip.Size = new Size(330, 22);
 			statusStrip.SizingGrip = false;
-			statusStrip.TabIndex = 11;
+			statusStrip.TabIndex = 12;
 			statusStrip.TabStop = true;
 			statusStrip.Text = "statusStrip";
 			// 
@@ -237,6 +238,19 @@
 			labelStatus.Text = "status";
 			labelStatus.ToolTipText = "Some information";
 			// 
+			// buttonClearText
+			// 
+			buttonClearText.Image = Properties.Resources.delete;
+			buttonClearText.ImageAlign = ContentAlignment.MiddleRight;
+			buttonClearText.Location = new Point(189, 314);
+			buttonClearText.Name = "buttonClearText";
+			buttonClearText.Size = new Size(116, 27);
+			buttonClearText.TabIndex = 8;
+			buttonClearText.Text = "Clear text";
+			buttonClearText.TextImageRelation = TextImageRelation.ImageBeforeText;
+			buttonClearText.UseVisualStyleBackColor = true;
+			buttonClearText.Click += ButtonClearText_Click;
+			// 
 			// MainForm
 			// 
 			AccessibleDescription = "This is the application window.";
@@ -245,6 +259,7 @@
 			AutoScaleDimensions = new SizeF(7F, 15F);
 			AutoScaleMode = AutoScaleMode.Font;
 			ClientSize = new Size(330, 431);
+			Controls.Add(buttonClearText);
 			Controls.Add(statusStrip);
 			Controls.Add(buttonShowVoiceInfo);
 			Controls.Add(buttonStop);
@@ -288,5 +303,6 @@
 		private Button buttonShowVoiceInfo;
 		private StatusStrip statusStrip;
 		private ToolStripStatusLabel labelStatus;
+		private Button buttonClearText;
 	}
 }
