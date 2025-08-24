@@ -38,9 +38,9 @@
 			trackBarSpeechRate = new TrackBar();
 			toolTip = new ToolTip(components);
 			listBoxVoices = new ListBox();
-			labelComputerVoice = new Label();
 			buttonPause = new Button();
 			buttonStop = new Button();
+			labelComputerVoice = new Label();
 			((System.ComponentModel.ISupportInitialize)trackBarVolume).BeginInit();
 			((System.ComponentModel.ISupportInitialize)trackBarSpeechRate).BeginInit();
 			SuspendLayout();
@@ -64,11 +64,13 @@
 			buttonSpeak.AccessibleDescription = "Speak the text";
 			buttonSpeak.AccessibleName = "Speak button";
 			buttonSpeak.AccessibleRole = AccessibleRole.PushButton;
-			buttonSpeak.Location = new Point(20, 369);
+			buttonSpeak.Image = Properties.Resources.control_play_blue;
+			buttonSpeak.Location = new Point(20, 359);
 			buttonSpeak.Name = "buttonSpeak";
-			buttonSpeak.Size = new Size(85, 38);
+			buttonSpeak.Size = new Size(85, 51);
 			buttonSpeak.TabIndex = 7;
 			buttonSpeak.Text = "Speak";
+			buttonSpeak.TextImageRelation = TextImageRelation.ImageBeforeText;
 			toolTip.SetToolTip(buttonSpeak, "Speak");
 			buttonSpeak.UseVisualStyleBackColor = true;
 			buttonSpeak.Click += ButtonSpeak_Click;
@@ -140,6 +142,38 @@
 			listBoxVoices.TabIndex = 2;
 			toolTip.SetToolTip(listBoxVoices, "List of installed comuter voices");
 			// 
+			// buttonPause
+			// 
+			buttonPause.AccessibleDescription = "Pause and resume the voice";
+			buttonPause.AccessibleName = "Pause/resume button";
+			buttonPause.AccessibleRole = AccessibleRole.PushButton;
+			buttonPause.Image = Properties.Resources.control_pause_blue;
+			buttonPause.Location = new Point(111, 359);
+			buttonPause.Name = "buttonPause";
+			buttonPause.Size = new Size(97, 51);
+			buttonPause.TabIndex = 8;
+			buttonPause.Text = "Pause";
+			buttonPause.TextImageRelation = TextImageRelation.ImageBeforeText;
+			toolTip.SetToolTip(buttonPause, "Pause/Resume");
+			buttonPause.UseVisualStyleBackColor = true;
+			buttonPause.Click += ButtonPause_Click;
+			// 
+			// buttonStop
+			// 
+			buttonStop.AccessibleDescription = "Stop the voice";
+			buttonStop.AccessibleName = "Stop";
+			buttonStop.AccessibleRole = AccessibleRole.PushButton;
+			buttonStop.Image = Properties.Resources.control_stop_blue;
+			buttonStop.Location = new Point(214, 359);
+			buttonStop.Name = "buttonStop";
+			buttonStop.Size = new Size(85, 51);
+			buttonStop.TabIndex = 9;
+			buttonStop.Text = "Stop";
+			buttonStop.TextImageRelation = TextImageRelation.ImageBeforeText;
+			toolTip.SetToolTip(buttonStop, "Stop");
+			buttonStop.UseVisualStyleBackColor = true;
+			buttonStop.Click += ButtonStop_Click;
+			// 
 			// labelComputerVoice
 			// 
 			labelComputerVoice.AccessibleDescription = "label for computer voices";
@@ -151,34 +185,6 @@
 			labelComputerVoice.Size = new Size(106, 15);
 			labelComputerVoice.TabIndex = 1;
 			labelComputerVoice.Text = "computer voice(s):";
-			// 
-			// buttonPause
-			// 
-			buttonPause.AccessibleDescription = "Pause and resume the voice";
-			buttonPause.AccessibleName = "Pause/resume button";
-			buttonPause.AccessibleRole = AccessibleRole.PushButton;
-			buttonPause.Location = new Point(111, 369);
-			buttonPause.Name = "buttonPause";
-			buttonPause.Size = new Size(85, 38);
-			buttonPause.TabIndex = 8;
-			buttonPause.Text = "Pause";
-			toolTip.SetToolTip(buttonPause, "Pause/Resume");
-			buttonPause.UseVisualStyleBackColor = true;
-			buttonPause.Click += ButtonPause_Click;
-			// 
-			// buttonStop
-			// 
-			buttonStop.AccessibleDescription = "Stop the voice";
-			buttonStop.AccessibleName = "Stop";
-			buttonStop.AccessibleRole = AccessibleRole.PushButton;
-			buttonStop.Location = new Point(202, 369);
-			buttonStop.Name = "buttonStop";
-			buttonStop.Size = new Size(85, 38);
-			buttonStop.TabIndex = 9;
-			buttonStop.Text = "Stop";
-			toolTip.SetToolTip(buttonStop, "Stop");
-			buttonStop.UseVisualStyleBackColor = true;
-			buttonStop.Click += ButtonStop_Click;
 			// 
 			// MainForm
 			// 
