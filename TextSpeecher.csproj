@@ -8,7 +8,7 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <StartupObject>TextSpeecher.Program</StartupObject>
     <GenerateDocumentationFile>True</GenerateDocumentationFile>
-    <Version>0.3.1.5</Version>
+    <Version>1.0.0.6</Version>
     <ApplicationIcon>TextSpeecher_logo.ico</ApplicationIcon>
     <Title>TextSpeecher</Title>
     <Description>TextSpeecher is a small program that reads text aloud.
@@ -38,6 +38,21 @@
 
   <ItemGroup>
     <PackageReference Include="System.Speech" Version="9.0.8" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Properties\Resources.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Update="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
   </ItemGroup>
 
   <ItemGroup>
