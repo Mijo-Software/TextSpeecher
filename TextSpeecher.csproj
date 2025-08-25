@@ -7,7 +7,7 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <StartupObject>TextSpeecher.Program</StartupObject>
     <GenerateDocumentationFile>True</GenerateDocumentationFile>
-    <Version>1.4.1.11</Version>
+    <Version>1.4.2.12</Version>
     <ApplicationIcon>TextSpeecher_logo.ico</ApplicationIcon>
     <Title>TextSpeecher</Title>
     <Description>TextSpeecher is a small program that reads text aloud.
@@ -23,6 +23,9 @@
     <PublishTrimmed>False</PublishTrimmed>
     <TargetFramework>net9.0-windows</TargetFramework>
     <AutoGenerateBindingRedirects>False</AutoGenerateBindingRedirects>
+    <Company>Mijo Software</Company>
+    <Authors>Michael Johne</Authors>
+    <PackageTags>text speecher, text speaking, speech synthesis</PackageTags>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
