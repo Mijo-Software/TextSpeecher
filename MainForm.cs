@@ -10,6 +10,79 @@ namespace TextSpeecher
 		// Declare a SpeechSynthesizer instance
 		private readonly SpeechSynthesizer? synthesizer;
 
+		/// <summary>
+		/// Sets the status bar text.
+		/// </summary>
+		/// <param name="text">The main text to be displayed on the status bar.</param>
+		/// <param name="additionalInfo">Additional information to be displayed alongside the main text.</param>
+		private void SetStatusBar(string text, string additionalInfo = "")
+		{
+			// Check if the text is not null or whitespace
+			if (string.IsNullOrWhiteSpace(value: text))
+			{
+				return;
+			}
+			// Set the status bar text and enable it
+			labelStatus.Enabled = true;
+			labelStatus.Text = string.IsNullOrWhiteSpace(value: additionalInfo) ? text : $"{text} - {additionalInfo}";
+		}
+
+		/// <summary>
+		/// Clears the status bar text.
+		/// </summary>
+		private void ClearStatusBar()
+		{
+			// Clear the status bar text and disable it
+			labelStatus.Enabled = false;
+			labelStatus.Text = string.Empty;
+		}
+
+		// Method to count words in a given string
+		private static int CountWords(string text)
+		{
+			// Check if the input text is null or empty.
+			if (string.IsNullOrEmpty(value: text))
+			{
+				return 0;
+			}
+
+			// Define a set of delimiters (spaces, new lines, tabs)
+			char[] delimiters = [' ', '\r', '\n', '\t'];
+
+			// Split the string into an array of words using the delimiters
+			// and remove any empty entries that might result from multiple delimiters.
+			string[] words = text.Split(separator: delimiters, options: StringSplitOptions.RemoveEmptyEntries);
+
+			// Return the number of words, which is the length of the array.
+			return words.Length;
+		}
+
+
+		// Method to count installed voices
+		private int CountInstalledVoice()
+		{
+			// Check if the ListBox control is null
+			if (listBoxVoices == null)
+			{
+				// Show a message box if the ListBox control is not found
+				_ = MessageBox.Show(text: "The ListBox control was not found.", caption: "Error", buttons: MessageBoxButtons.OK, icon: MessageBoxIcon.Error);
+				return 0;
+			}
+			// Return the count of items in the ListBox
+			if (listBoxVoices.Items.Count > 0)
+			{
+				// Return the count of installed voices
+				return listBoxVoices.Items.Count;
+			}
+			else
+			{
+				// Show a message box if no voices are found
+				_ = MessageBox.Show(text: "No installed voices were found.", caption: "Error", buttons: MessageBoxButtons.OK, icon: MessageBoxIcon.Error);
+				return 0;
+			}
+		}
+
+
 		// Method to load installed voices into the ListBox
 		private void LoadInstalledVoicesToListBox()
 		{
@@ -120,6 +193,7 @@ namespace TextSpeecher
 					listBoxVoices.Enabled = true;
 					trackBarVolume.Enabled = true;
 					trackBarSpeechRate.Enabled = true;
+					trackBarSpeechRate.Enabled = true;
 					labelStatus.Text = string.Empty;
 					break;
 				case SynthesizerState.Speaking:
@@ -132,6 +206,7 @@ namespace TextSpeecher
 					buttonSaveAsWavFile.Enabled = false;
 					listBoxVoices.Enabled = false;
 					trackBarVolume.Enabled = false;
+					trackBarSpeechRate.Enabled = false;
 					break;
 				case SynthesizerState.Paused:
 					// When paused, disable Speak button, enable Pause button, and disable Stop button
@@ -195,6 +270,26 @@ namespace TextSpeecher
 			labelSpeechRate.Text = $"Speech Rate: {synthesizer.Rate}";
 		}
 
+		#region Leave event handler
+
+		/// <summary>
+		/// Called when the mouse pointer leaves a control.
+		/// </summary>
+		/// <param name="sender">The event source.</param>
+		/// <param name="e">The <see cref="EventArgs"/> instance that contains the event data.</param>
+		private void ClearStatusBar_Leave(object sender, EventArgs e)
+		{
+			// Check if the sender is null
+			ArgumentNullException.ThrowIfNull(argument: sender);
+			// Check if the event arguments are null
+			ArgumentNullException.ThrowIfNull(argument: e);
+			// Clear the status bar text when the mouse leaves the control
+			ClearStatusBar();
+		}
+
+		#endregion
+
+
 		// Event handler for the Speak button click event
 		private void ButtonSpeak_Click(object sender, EventArgs e)
 		{
@@ -222,6 +317,8 @@ namespace TextSpeecher
 			synthesizer.Volume = trackBarVolume.Value;
 			// Update the volume label to show the current volume
 			labelVolume.Text = $"Volume: {synthesizer.Volume}";
+			// Show status bar message with the current volume
+			SetStatusBar(text: "Adjust the volume of the speech.", additionalInfo: $"Current Volume: {synthesizer.Volume}");
 		}
 
 		// Event handler for the speech rate track bar scroll event
@@ -231,6 +328,8 @@ namespace TextSpeecher
 			synthesizer.Rate = trackBarSpeechRate.Value;
 			// Update the speech rate label to show the current rate
 			labelSpeechRate.Text = $"Speech Rate: {synthesizer.Rate}";
+			// Show status bar message with the current speech rate
+			SetStatusBar(text: "Adjust the speech rate.", additionalInfo: $"Current Speech Rate: {synthesizer.Rate}");
 		}
 
 		// Event handler for the Pause button click event
@@ -390,6 +489,7 @@ namespace TextSpeecher
 				buttonClearText.Enabled = true;
 				buttonSpeak.Enabled = true;
 				buttonSaveAsWavFile.Enabled = true;
+				SetStatusBar(text: "Enter text to be spoken.", additionalInfo: $"Current Text Length: {textBox.TextLength}. Total words: {CountWords(text: textBox.Text)}");
 			}
 			else
 			{
@@ -398,6 +498,178 @@ namespace TextSpeecher
 				buttonSpeak.Enabled = false;
 				buttonSaveAsWavFile.Enabled = false;
 			}
+		}
+
+		// Event handler for the ListBox enter event
+		private void ListBoxVoices_Enter(object sender, EventArgs e)
+		{
+			// Show status bar message when ListBox gains focus
+			SetStatusBar(text: "Select a voice from the list.", additionalInfo: $"Total Voices: {CountInstalledVoice()}");
+		}
+
+		// Event handler for the ListBox mouse enter event
+		private void ListBoxVoices_MouseEnter(object sender, EventArgs e)
+		{
+			// Show status bar message when mouse enters the ListBox
+			SetStatusBar(text: "Select a voice from the list.", additionalInfo: $"Total Voices: {CountInstalledVoice()}");
+		}
+
+		// Event handler for the TextBox mouse enter event
+		private void TextBox_MouseEnter(object sender, EventArgs e)
+		{
+			// Show status bar message when mouse enters the TextBox
+			SetStatusBar(text: "Enter text to be spoken.", additionalInfo: $"Current Text Length: {textBox.TextLength}. Total words: {CountWords(text: textBox.Text)}");
+		}
+
+		// Event handler for the TextBox enter event
+		private void TextBox_Enter(object sender, EventArgs e)
+		{
+			// Show status bar message when TextBox gains focus
+			SetStatusBar(text: "Enter text to be spoken.", additionalInfo: $"Current Text Length: {textBox.TextLength}. Total words: {CountWords(text: textBox.Text)}");
+		}
+
+		// Event handler for the Volume track bar enter event
+		private void TrackBarVolume_Enter(object sender, EventArgs e)
+		{
+			// Show status bar message when volume track bar gains focus
+			SetStatusBar(text: "Adjust the volume of the speech.", additionalInfo: $"Current Volume: {synthesizer.Volume}");
+		}
+
+		// Event handler for the Volume track bar mouse enter event
+		private void TrackBarVolume_MouseEnter(object sender, EventArgs e)
+		{
+			// Show status bar message when mouse enters the volume track bar
+			SetStatusBar(text: "Adjust the volume of the speech.", additionalInfo: $"Current Volume: {synthesizer.Volume}");
+		}
+
+		// Event handler for the Volume label enter event
+		private void TrackBarSpeechRate_Enter(object sender, EventArgs e)
+		{
+			// Show status bar message when speech rate track bar gains focus
+			SetStatusBar(text: "Adjust the speech rate.", additionalInfo: $"Current Speech Rate: {synthesizer.Rate}");
+		}
+
+		// Event handler for the Speech Rate track bar mouse enter event
+		private void TrackBarSpeechRate_MouseEnter(object sender, EventArgs e)
+		{
+			// Show status bar message when mouse enters the speech rate track bar
+			SetStatusBar(text: "Adjust the speech rate.", additionalInfo: $"Current Speech Rate: {synthesizer.Rate}");
+		}
+
+		// Event handler for the Speech Rate label enter event
+		private void LabelSpeechRate_Enter(object sender, EventArgs e)
+		{
+			// Show status bar message when speech rate label gains focus
+			SetStatusBar(text: "Adjust the speech rate.", additionalInfo: $"Current Speech Rate: {synthesizer.Rate}");
+		}
+
+		// Event handler for the Speech Rate label mouse enter event
+		private void LabelSpeechRate_MouseEnter(object sender, EventArgs e)
+		{
+			// Show status bar message when mouse enters the speech rate label
+			SetStatusBar(text: "Adjust the speech rate.", additionalInfo: $"Current Speech Rate: {synthesizer.Rate}");
+		}
+
+		// Event handler for the Volume label enter event
+		private void LabelComputerVoice_Enter(object sender, EventArgs e)
+		{
+			// Show status bar message when computer voice label gains focus
+			SetStatusBar(text: "List of installed computer voices.", additionalInfo: $"Total Voices: {CountInstalledVoice()}");
+		}
+
+		// Event handler for the Computer Voice label mouse enter event
+		private void LabelComputerVoice_MouseEnter(object sender, EventArgs e)
+		{
+			SetStatusBar(text: "List of installed computer voices.", additionalInfo: $"Total Voices: {CountInstalledVoice()}");
+		}
+
+		// Event handler for the Show Voice Info button enter event
+		private void ButtonShowVoiceInfo_Enter(object sender, EventArgs e)
+		{
+			// Show status bar message when Show Voice Info button gains focus
+			SetStatusBar(text: "Show information about the selected voice.", additionalInfo: "");
+		}
+
+		// Event handler for the Show Voice Info button mouse enter event
+		private void ButtonShowVoiceInfo_MouseEnter(object sender, EventArgs e)
+		{
+			// Show status bar message when mouse enters the Show Voice Info button
+			SetStatusBar(text: "Show information about the selected voice.", additionalInfo: "");
+		}
+
+		// Event handler for the Speak button enter event
+		private void ButtonClearText_Enter(object sender, EventArgs e)
+		{
+			// Show status bar message when Clear Text button gains focus
+			SetStatusBar(text: "Clear the text box.", additionalInfo: "");
+		}
+
+		// Event handler for the Speak button mouse enter event
+		private void ButtonClearText_MouseEnter(object sender, EventArgs e)
+		{
+			// Show status bar message when mouse enters the Clear Text button
+			SetStatusBar(text: "Clear the text box.", additionalInfo: "");
+		}
+
+		// Event handler for the Speak button enter event
+		private void ButtonPause_Enter(object sender, EventArgs e)
+		{
+			// Show status bar message when Pause button gains focus
+			SetStatusBar(text: "Pause or resume the speech.", additionalInfo: "");
+		}
+
+		// Event handler for the Speak button mouse enter event
+		private void ButtonPause_MouseEnter(object sender, EventArgs e)
+		{
+			// Show status bar message when mouse enters the Pause button
+			SetStatusBar(text: "Pause or resume the speech.", additionalInfo: "");
+		}
+
+		// Event handler for the Stop button enter event
+		private void ButtonStop_Enter(object sender, EventArgs e)
+		{
+			// Show status bar message when Stop button gains focus
+			SetStatusBar(text: "Stop the speech.", additionalInfo: "");
+		}
+
+		// Event handler for the Stop button mouse enter event
+		private void ButtonStop_MouseEnter(object sender, EventArgs e)
+		{
+			// Show status bar message when mouse enters the Stop button
+			SetStatusBar(text: "Stop the speech.", additionalInfo: "");
+		}
+
+		// Event handler for the Speak button enter event
+		private void ButtonSaveAsWavFile_Enter(object sender, EventArgs e)
+		{
+			// Show status bar message when Save As WAV File button gains focus
+			SetStatusBar(text: "Save the spoken text as a WAV file.", additionalInfo: "");
+		}
+
+		// Event handler for the Speak button mouse enter event
+		private void ButtonSaveAsWavFile_MouseEnter(object sender, EventArgs e)
+		{
+			// Show status bar message when mouse enters the Save As WAV File button
+			SetStatusBar(text: "Save the spoken text as a WAV file.", additionalInfo: "");
+		}
+
+		// Event handler for the Speak button enter event
+		private void LabelStatus_MouseEnter(object sender, EventArgs e)
+		{
+			// Show status bar message when mouse enters the status label
+			SetStatusBar(text: "Status bar showing current status and information.", additionalInfo: "");
+		}
+
+		// Event handler for the Speak button mouse enter event
+		private void ButtonSpeak_Enter(object sender, EventArgs e)
+		{
+			SetStatusBar(text: "Speak the entered text.", additionalInfo: "");
+		}
+
+		// Event handler for the Speak button mouse enter event
+		private void ButtonSpeak_MouseEnter(object sender, EventArgs e)
+		{
+			SetStatusBar(text: "Speak the entered text.", additionalInfo: "");
 		}
 	}
 }
