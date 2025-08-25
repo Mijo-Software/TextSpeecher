@@ -62,10 +62,14 @@
 			textBox.Name = "textBox";
 			textBox.PlaceholderText = "Please enter text to speak.";
 			textBox.ScrollBars = ScrollBars.Vertical;
-			textBox.Size = new Size(302, 166);
+			textBox.Size = new Size(335, 166);
 			textBox.TabIndex = 0;
 			textBox.Text = "Text to speak";
 			textBox.TextChanged += TextBox_TextChanged;
+			textBox.Enter += TextBox_Enter;
+			textBox.Leave += ClearStatusBar_Leave;
+			textBox.MouseEnter += TextBox_MouseEnter;
+			textBox.MouseLeave += ClearStatusBar_Leave;
 			// 
 			// buttonSpeak
 			// 
@@ -83,6 +87,10 @@
 			toolTip.SetToolTip(buttonSpeak, "Speak");
 			buttonSpeak.UseVisualStyleBackColor = true;
 			buttonSpeak.Click += ButtonSpeak_Click;
+			buttonSpeak.Enter += ButtonSpeak_Enter;
+			buttonSpeak.Leave += ClearStatusBar_Leave;
+			buttonSpeak.MouseEnter += ButtonSpeak_MouseEnter;
+			buttonSpeak.MouseLeave += ClearStatusBar_Leave;
 			// 
 			// trackBarVolume
 			// 
@@ -92,12 +100,16 @@
 			trackBarVolume.Location = new Point(189, 208);
 			trackBarVolume.Maximum = 100;
 			trackBarVolume.Name = "trackBarVolume";
-			trackBarVolume.Size = new Size(125, 45);
+			trackBarVolume.Size = new Size(158, 45);
 			trackBarVolume.TabIndex = 5;
 			trackBarVolume.TickFrequency = 5;
 			trackBarVolume.TickStyle = TickStyle.Both;
 			toolTip.SetToolTip(trackBarVolume, "volume");
 			trackBarVolume.Scroll += TrackBarVolume_Scroll;
+			trackBarVolume.Enter += TrackBarVolume_Enter;
+			trackBarVolume.Leave += ClearStatusBar_Leave;
+			trackBarVolume.MouseEnter += TrackBarVolume_MouseEnter;
+			trackBarVolume.MouseLeave += ClearStatusBar_Leave;
 			// 
 			// labelVolume
 			// 
@@ -122,6 +134,10 @@
 			labelSpeechRate.Size = new Size(70, 15);
 			labelSpeechRate.TabIndex = 6;
 			labelSpeechRate.Text = "speech rate:";
+			labelSpeechRate.Enter += LabelSpeechRate_Enter;
+			labelSpeechRate.Leave += ClearStatusBar_Leave;
+			labelSpeechRate.MouseEnter += LabelSpeechRate_MouseEnter;
+			labelSpeechRate.MouseLeave += ClearStatusBar_Leave;
 			// 
 			// trackBarSpeechRate
 			// 
@@ -132,12 +148,16 @@
 			trackBarSpeechRate.Location = new Point(189, 274);
 			trackBarSpeechRate.Minimum = -10;
 			trackBarSpeechRate.Name = "trackBarSpeechRate";
-			trackBarSpeechRate.Size = new Size(125, 45);
+			trackBarSpeechRate.Size = new Size(158, 45);
 			trackBarSpeechRate.TabIndex = 7;
 			trackBarSpeechRate.TickFrequency = 2;
 			trackBarSpeechRate.TickStyle = TickStyle.Both;
 			toolTip.SetToolTip(trackBarSpeechRate, "speech rate");
 			trackBarSpeechRate.Scroll += TrackBarSpeechRate_Scroll;
+			trackBarSpeechRate.Enter += TrackBarSpeechRate_Enter;
+			trackBarSpeechRate.Leave += ClearStatusBar_Leave;
+			trackBarSpeechRate.MouseEnter += TrackBarSpeechRate_MouseEnter;
+			trackBarSpeechRate.MouseLeave += ClearStatusBar_Leave;
 			// 
 			// listBoxVoices
 			// 
@@ -150,6 +170,10 @@
 			listBoxVoices.Size = new Size(171, 94);
 			listBoxVoices.TabIndex = 2;
 			toolTip.SetToolTip(listBoxVoices, "List of installed comuter voices");
+			listBoxVoices.Enter += ListBoxVoices_Enter;
+			listBoxVoices.Leave += ClearStatusBar_Leave;
+			listBoxVoices.MouseEnter += ListBoxVoices_MouseEnter;
+			listBoxVoices.MouseLeave += ClearStatusBar_Leave;
 			// 
 			// buttonPause
 			// 
@@ -167,6 +191,10 @@
 			toolTip.SetToolTip(buttonPause, "Pause/Resume");
 			buttonPause.UseVisualStyleBackColor = true;
 			buttonPause.Click += ButtonPause_Click;
+			buttonPause.Enter += ButtonPause_Enter;
+			buttonPause.Leave += ClearStatusBar_Leave;
+			buttonPause.MouseEnter += ButtonPause_MouseEnter;
+			buttonPause.MouseLeave += ClearStatusBar_Leave;
 			// 
 			// buttonStop
 			// 
@@ -184,6 +212,10 @@
 			toolTip.SetToolTip(buttonStop, "Stop");
 			buttonStop.UseVisualStyleBackColor = true;
 			buttonStop.Click += ButtonStop_Click;
+			buttonStop.Enter += ButtonStop_Enter;
+			buttonStop.Leave += ClearStatusBar_Leave;
+			buttonStop.MouseEnter += ButtonStop_MouseEnter;
+			buttonStop.MouseLeave += ClearStatusBar_Leave;
 			// 
 			// buttonShowVoiceInfo
 			// 
@@ -201,6 +233,10 @@
 			toolTip.SetToolTip(buttonShowVoiceInfo, "voice info");
 			buttonShowVoiceInfo.UseVisualStyleBackColor = true;
 			buttonShowVoiceInfo.Click += ButtonShowVoiceInfo_Click;
+			buttonShowVoiceInfo.Enter += ButtonShowVoiceInfo_Enter;
+			buttonShowVoiceInfo.Leave += ClearStatusBar_Leave;
+			buttonShowVoiceInfo.MouseEnter += ButtonShowVoiceInfo_MouseEnter;
+			buttonShowVoiceInfo.MouseLeave += ClearStatusBar_Leave;
 			// 
 			// buttonSaveAsWavFile
 			// 
@@ -218,6 +254,10 @@
 			toolTip.SetToolTip(buttonSaveAsWavFile, "Save as WAV file");
 			buttonSaveAsWavFile.UseVisualStyleBackColor = true;
 			buttonSaveAsWavFile.Click += ButtonSaveAsWavFile_Click;
+			buttonSaveAsWavFile.Enter += ButtonSaveAsWavFile_Enter;
+			buttonSaveAsWavFile.Leave += ClearStatusBar_Leave;
+			buttonSaveAsWavFile.MouseEnter += ButtonSaveAsWavFile_MouseEnter;
+			buttonSaveAsWavFile.MouseLeave += ClearStatusBar_Leave;
 			// 
 			// labelComputerVoice
 			// 
@@ -230,6 +270,10 @@
 			labelComputerVoice.Size = new Size(157, 15);
 			labelComputerVoice.TabIndex = 1;
 			labelComputerVoice.Text = "Installed Computer Coice(s):";
+			labelComputerVoice.Enter += LabelComputerVoice_Enter;
+			labelComputerVoice.Leave += ClearStatusBar_Leave;
+			labelComputerVoice.MouseEnter += LabelComputerVoice_MouseEnter;
+			labelComputerVoice.MouseLeave += ClearStatusBar_Leave;
 			// 
 			// statusStrip
 			// 
@@ -241,7 +285,7 @@
 			statusStrip.Name = "statusStrip";
 			statusStrip.RenderMode = ToolStripRenderMode.ManagerRenderMode;
 			statusStrip.ShowItemToolTips = true;
-			statusStrip.Size = new Size(330, 22);
+			statusStrip.Size = new Size(359, 22);
 			statusStrip.SizingGrip = false;
 			statusStrip.TabIndex = 0;
 			statusStrip.TabStop = true;
@@ -257,6 +301,8 @@
 			labelStatus.Size = new Size(38, 17);
 			labelStatus.Text = "status";
 			labelStatus.ToolTipText = "Some information";
+			labelStatus.MouseEnter += LabelStatus_MouseEnter;
+			labelStatus.MouseLeave += ClearStatusBar_Leave;
 			// 
 			// buttonClearText
 			// 
@@ -270,6 +316,10 @@
 			buttonClearText.TextImageRelation = TextImageRelation.ImageBeforeText;
 			buttonClearText.UseVisualStyleBackColor = true;
 			buttonClearText.Click += ButtonClearText_Click;
+			buttonClearText.Enter += ButtonClearText_Enter;
+			buttonClearText.Leave += ClearStatusBar_Leave;
+			buttonClearText.MouseEnter += ButtonClearText_MouseEnter;
+			buttonClearText.MouseLeave += ClearStatusBar_Leave;
 			// 
 			// saveFileDialogWaveFile
 			// 
@@ -283,7 +333,7 @@
 			AccessibleRole = AccessibleRole.Window;
 			AutoScaleDimensions = new SizeF(7F, 15F);
 			AutoScaleMode = AutoScaleMode.Font;
-			ClientSize = new Size(330, 417);
+			ClientSize = new Size(359, 417);
 			Controls.Add(buttonSaveAsWavFile);
 			Controls.Add(buttonClearText);
 			Controls.Add(statusStrip);
