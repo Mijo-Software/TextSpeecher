@@ -41,10 +41,12 @@
 			buttonPause = new Button();
 			buttonStop = new Button();
 			buttonShowVoiceInfo = new Button();
+			buttonSaveAsWavFile = new Button();
 			labelComputerVoice = new Label();
 			statusStrip = new StatusStrip();
 			labelStatus = new ToolStripStatusLabel();
 			buttonClearText = new Button();
+			saveFileDialogWaveFile = new SaveFileDialog();
 			((System.ComponentModel.ISupportInitialize)trackBarVolume).BeginInit();
 			((System.ComponentModel.ISupportInitialize)trackBarSpeechRate).BeginInit();
 			statusStrip.SuspendLayout();
@@ -71,10 +73,10 @@
 			buttonSpeak.AccessibleRole = AccessibleRole.PushButton;
 			buttonSpeak.Image = Properties.Resources.control_play_blue;
 			buttonSpeak.ImageAlign = ContentAlignment.MiddleRight;
-			buttonSpeak.Location = new Point(26, 347);
+			buttonSpeak.Location = new Point(12, 357);
 			buttonSpeak.Name = "buttonSpeak";
-			buttonSpeak.Size = new Size(85, 51);
-			buttonSpeak.TabIndex = 9;
+			buttonSpeak.Size = new Size(67, 27);
+			buttonSpeak.TabIndex = 10;
 			buttonSpeak.Text = "Speak";
 			buttonSpeak.TextImageRelation = TextImageRelation.ImageBeforeText;
 			toolTip.SetToolTip(buttonSpeak, "Speak");
@@ -155,10 +157,10 @@
 			buttonPause.AccessibleRole = AccessibleRole.PushButton;
 			buttonPause.Image = Properties.Resources.control_pause_blue;
 			buttonPause.ImageAlign = ContentAlignment.MiddleRight;
-			buttonPause.Location = new Point(117, 347);
+			buttonPause.Location = new Point(85, 357);
 			buttonPause.Name = "buttonPause";
-			buttonPause.Size = new Size(97, 51);
-			buttonPause.TabIndex = 10;
+			buttonPause.Size = new Size(76, 27);
+			buttonPause.TabIndex = 11;
 			buttonPause.Text = "Pause";
 			buttonPause.TextImageRelation = TextImageRelation.ImageBeforeText;
 			toolTip.SetToolTip(buttonPause, "Pause/Resume");
@@ -172,10 +174,10 @@
 			buttonStop.AccessibleRole = AccessibleRole.PushButton;
 			buttonStop.Image = Properties.Resources.control_stop_blue;
 			buttonStop.ImageAlign = ContentAlignment.MiddleRight;
-			buttonStop.Location = new Point(220, 347);
+			buttonStop.Location = new Point(167, 357);
 			buttonStop.Name = "buttonStop";
-			buttonStop.Size = new Size(85, 51);
-			buttonStop.TabIndex = 11;
+			buttonStop.Size = new Size(67, 27);
+			buttonStop.TabIndex = 12;
 			buttonStop.Text = "Stop";
 			buttonStop.TextImageRelation = TextImageRelation.ImageBeforeText;
 			toolTip.SetToolTip(buttonStop, "Stop");
@@ -192,12 +194,29 @@
 			buttonShowVoiceInfo.Location = new Point(12, 314);
 			buttonShowVoiceInfo.Name = "buttonShowVoiceInfo";
 			buttonShowVoiceInfo.Size = new Size(171, 27);
-			buttonShowVoiceInfo.TabIndex = 3;
+			buttonShowVoiceInfo.TabIndex = 8;
 			buttonShowVoiceInfo.Text = "Voice Info";
 			buttonShowVoiceInfo.TextImageRelation = TextImageRelation.ImageBeforeText;
 			toolTip.SetToolTip(buttonShowVoiceInfo, "voice info");
 			buttonShowVoiceInfo.UseVisualStyleBackColor = true;
 			buttonShowVoiceInfo.Click += ButtonShowVoiceInfo_Click;
+			// 
+			// buttonSaveAsWavFile
+			// 
+			buttonSaveAsWavFile.AccessibleDescription = "Save the speech into a WAV file";
+			buttonSaveAsWavFile.AccessibleName = "Save as WAV file";
+			buttonSaveAsWavFile.AccessibleRole = AccessibleRole.PushButton;
+			buttonSaveAsWavFile.Image = Properties.Resources.diskette;
+			buttonSaveAsWavFile.ImageAlign = ContentAlignment.MiddleRight;
+			buttonSaveAsWavFile.Location = new Point(240, 357);
+			buttonSaveAsWavFile.Name = "buttonSaveAsWavFile";
+			buttonSaveAsWavFile.Size = new Size(78, 27);
+			buttonSaveAsWavFile.TabIndex = 13;
+			buttonSaveAsWavFile.Text = "Wav File";
+			buttonSaveAsWavFile.TextImageRelation = TextImageRelation.ImageBeforeText;
+			toolTip.SetToolTip(buttonSaveAsWavFile, "Save as WAV file");
+			buttonSaveAsWavFile.UseVisualStyleBackColor = true;
+			buttonSaveAsWavFile.Click += ButtonSaveAsWavFile_Click;
 			// 
 			// labelComputerVoice
 			// 
@@ -217,13 +236,13 @@
 			statusStrip.AllowClickThrough = true;
 			statusStrip.AllowItemReorder = true;
 			statusStrip.Items.AddRange(new ToolStripItem[] { labelStatus });
-			statusStrip.Location = new Point(0, 409);
+			statusStrip.Location = new Point(0, 395);
 			statusStrip.Name = "statusStrip";
 			statusStrip.RenderMode = ToolStripRenderMode.ManagerRenderMode;
 			statusStrip.ShowItemToolTips = true;
 			statusStrip.Size = new Size(330, 22);
 			statusStrip.SizingGrip = false;
-			statusStrip.TabIndex = 12;
+			statusStrip.TabIndex = 0;
 			statusStrip.TabStop = true;
 			statusStrip.Text = "statusStrip";
 			// 
@@ -245,11 +264,16 @@
 			buttonClearText.Location = new Point(189, 314);
 			buttonClearText.Name = "buttonClearText";
 			buttonClearText.Size = new Size(116, 27);
-			buttonClearText.TabIndex = 8;
+			buttonClearText.TabIndex = 9;
 			buttonClearText.Text = "Clear text";
 			buttonClearText.TextImageRelation = TextImageRelation.ImageBeforeText;
 			buttonClearText.UseVisualStyleBackColor = true;
 			buttonClearText.Click += ButtonClearText_Click;
+			// 
+			// saveFileDialogWaveFile
+			// 
+			saveFileDialogWaveFile.DefaultExt = "wav";
+			saveFileDialogWaveFile.Filter = "WAV file|*.wav";
 			// 
 			// MainForm
 			// 
@@ -258,7 +282,8 @@
 			AccessibleRole = AccessibleRole.Window;
 			AutoScaleDimensions = new SizeF(7F, 15F);
 			AutoScaleMode = AutoScaleMode.Font;
-			ClientSize = new Size(330, 431);
+			ClientSize = new Size(330, 417);
+			Controls.Add(buttonSaveAsWavFile);
 			Controls.Add(buttonClearText);
 			Controls.Add(statusStrip);
 			Controls.Add(buttonShowVoiceInfo);
@@ -304,5 +329,7 @@
 		private StatusStrip statusStrip;
 		private ToolStripStatusLabel labelStatus;
 		private Button buttonClearText;
+		private Button buttonSaveAsWavFile;
+		private SaveFileDialog saveFileDialogWaveFile;
 	}
 }

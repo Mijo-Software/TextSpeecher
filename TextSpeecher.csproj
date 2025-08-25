@@ -2,13 +2,12 @@
 
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
-    <TargetFramework>net9.0-windows</TargetFramework>
     <Nullable>enable</Nullable>
     <UseWindowsForms>true</UseWindowsForms>
     <ImplicitUsings>enable</ImplicitUsings>
     <StartupObject>TextSpeecher.Program</StartupObject>
     <GenerateDocumentationFile>True</GenerateDocumentationFile>
-    <Version>1.3.0.9</Version>
+    <Version>1.4.0.10</Version>
     <ApplicationIcon>TextSpeecher_logo.ico</ApplicationIcon>
     <Title>TextSpeecher</Title>
     <Description>TextSpeecher is a small program that reads text aloud.
@@ -20,16 +19,23 @@
     <PackageProjectUrl>https://github.com/Mijo-Software/TextSpeecher</PackageProjectUrl>
     <RepositoryUrl>https://github.com/Mijo-Software/TextSpeecher</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
+    <PublishAot>True</PublishAot>
+    <PublishTrimmed>False</PublishTrimmed>
+    <TargetFramework>net9.0-windows</TargetFramework>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
     <WarningLevel>9999</WarningLevel>
     <CheckForOverflowUnderflow>True</CheckForOverflowUnderflow>
+    <IsTrimmable>True</IsTrimmable>
+    <IsAotCompatible>True</IsAotCompatible>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
     <WarningLevel>9999</WarningLevel>
     <CheckForOverflowUnderflow>True</CheckForOverflowUnderflow>
+    <IsTrimmable>True</IsTrimmable>
+    <IsAotCompatible>True</IsAotCompatible>
   </PropertyGroup>
 
   <ItemGroup>
