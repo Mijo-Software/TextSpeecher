@@ -65,6 +65,7 @@
 			textBox.Size = new Size(302, 166);
 			textBox.TabIndex = 0;
 			textBox.Text = "Text to speak";
+			textBox.TextChanged += TextBox_TextChanged;
 			// 
 			// buttonSpeak
 			// 
