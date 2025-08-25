@@ -13,6 +13,8 @@ namespace TextSpeecher
 		// Method to load installed voices into the ListBox
 		private void LoadInstalledVoicesToListBox()
 		{
+			// Disable the Show Voice Info button initially
+			buttonShowVoiceInfo.Enabled = false;
 			// Find the ListBox control by its name
 			if (listBoxVoices != null)
 			{
@@ -31,20 +33,22 @@ namespace TextSpeecher
 				{
 					// Select the first item in the ListBox
 					listBoxVoices.SelectedIndex = 0;
+					// Attach an event handler for when the selected index changes
+					listBoxVoices.SelectedIndexChanged += (s, e) =>
+					{
+						// Get the selected voice name
+						string selectedVoice = listBoxVoices.SelectedItem.ToString() ?? string.Empty;
+						// Set the synthesizer to use the selected voice
+						synthesizer.SelectVoice(name: selectedVoice);
+					};
+					// Enable the Show Voice Info button when a voice is selected
+					buttonShowVoiceInfo.Enabled = true;
 				}
 				else
 				{
 					// Show a message box if no voices are found
 					_ = MessageBox.Show(text: "No installed voices were found.", caption: "Error", buttons: MessageBoxButtons.OK, icon: MessageBoxIcon.Error);
 				}
-				// Attach an event handler for when the selected index changes
-				listBoxVoices.SelectedIndexChanged += (s, e) =>
-				{
-					// Get the selected voice name
-					string selectedVoice = listBoxVoices.SelectedItem.ToString() ?? string.Empty;
-					// Set the synthesizer to use the selected voice
-					synthesizer.SelectVoice(name: selectedVoice);
-				};
 			}
 			else
 			{
@@ -373,6 +377,26 @@ namespace TextSpeecher
 			{
 				// Show a message box if the user cancels the SaveFileDialog
 				_ = MessageBox.Show(text: "The save operation was canceled.", caption: "Canceled", buttons: MessageBoxButtons.OK, icon: MessageBoxIcon.Information);
+			}
+		}
+
+		// Event handler for the TextBox text changed event
+		private void TextBox_TextChanged(object sender, EventArgs e)
+		{
+			// Enable or disable buttons based on whether there is text in the TextBox
+			if (textBox.TextLength > 0)
+			{
+				// Enable buttons if there is text
+				buttonClearText.Enabled = true;
+				buttonSpeak.Enabled = true;
+				buttonSaveAsWavFile.Enabled = true;
+			}
+			else
+			{
+				// Disable buttons if there is no text
+				buttonClearText.Enabled = false;
+				buttonSpeak.Enabled = false;
+				buttonSaveAsWavFile.Enabled = false;
 			}
 		}
 	}
