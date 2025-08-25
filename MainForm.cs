@@ -1,4 +1,4 @@
-using System.Speech.AudioFormat;
+﻿using System.Speech.AudioFormat;
 using System.Speech.Synthesis;
 
 // Import necessary namespaces
@@ -112,6 +112,7 @@ namespace TextSpeecher
 					buttonPause.Enabled = false;
 					buttonStop.Enabled = false;
 					buttonClearText.Enabled = true;
+					buttonSaveAsWavFile.Enabled = true;
 					listBoxVoices.Enabled = true;
 					trackBarVolume.Enabled = true;
 					trackBarSpeechRate.Enabled = true;
@@ -124,6 +125,7 @@ namespace TextSpeecher
 					buttonPause.Enabled = true;
 					buttonStop.Enabled = true;
 					buttonClearText.Enabled = false;
+					buttonSaveAsWavFile.Enabled = false;
 					listBoxVoices.Enabled = false;
 					trackBarVolume.Enabled = false;
 					break;
@@ -132,6 +134,7 @@ namespace TextSpeecher
 					buttonSpeak.Enabled = false;
 					buttonPause.Enabled = true;
 					buttonStop.Enabled = false;
+					buttonSaveAsWavFile.Enabled = false;
 					break;
 				default:
 					// For any other state, enable Speak button and disable Pause and Stop buttons
@@ -140,6 +143,7 @@ namespace TextSpeecher
 					buttonPause.Enabled = false;
 					buttonStop.Enabled = false;
 					buttonClearText.Enabled = true;
+					buttonSaveAsWavFile.Enabled = true;
 					listBoxVoices.Enabled = true;
 					trackBarVolume.Enabled = true;
 					trackBarSpeechRate.Enabled = true;
@@ -161,6 +165,8 @@ namespace TextSpeecher
 		// Event handler for the SpeakCompleted event
 		private void Synthesizer_SpeakCompleted(object? sender, SpeakCompletedEventArgs e)
 		{
+			// Reset the output to the default audio device after saving
+			synthesizer.SetOutputToDefaultAudioDevice();
 		}
 
 		// Event handler for the form load event
@@ -302,6 +308,72 @@ namespace TextSpeecher
 		{
 			// Clear the text in the TextBox
 			textBox.Clear();
+		}
+
+		// Event handler for the Save As WAV File button click event
+		private void ButtonSaveAsWavFile_Click(object sender, EventArgs e)
+		{
+			// Check if the synthesizer instance is null
+			if (synthesizer == null)
+			{
+				// Show a message box if the synthesizer instance is null
+				_ = MessageBox.Show(text: "The SpeechSynthesizer instance is not initialized.", caption: "Error", buttons: MessageBoxButtons.OK, icon: MessageBoxIcon.Error);
+				return;
+			}
+			// Validate input before saving to WAV file
+			if (string.IsNullOrEmpty(value: textBox.Text))
+			{
+				// Show a message box if the text is empty
+				_ = MessageBox.Show(text: "Please enter text to speak.", caption: "Error", buttons: MessageBoxButtons.OK, icon: MessageBoxIcon.Error);
+				// Set focus back to the TextBox
+				_ = textBox.Focus();
+				return;
+			}
+			// Check if the synthesizer is currently speaking
+			if (synthesizer.State == SynthesizerState.Speaking)
+			{
+				// Show a message box if the synthesizer is currently speaking
+				_ = MessageBox.Show(text: "The synthesizer is currently speaking. Please stop it before saving to a file.", caption: "Error", buttons: MessageBoxButtons.OK, icon: MessageBoxIcon.Error);
+				return;
+			}
+			// Check if the synthesizer is currently paused
+			if (synthesizer.State == SynthesizerState.Paused)
+			{
+				// Show a message box if the synthesizer is currently paused
+				_ = MessageBox.Show(text: "The synthesizer is currently paused. Please resume or stop it before saving to a file.", caption: "Error", buttons: MessageBoxButtons.OK, icon: MessageBoxIcon.Error);
+				return;
+			}
+			// Check if a voice is selected in the ListBox
+			if (listBoxVoices.SelectedItem == null)
+			{
+				// Show a message box if no voice is selected
+				_ = MessageBox.Show(text: "Please select a voice before saving to a file.", caption: "Error", buttons: MessageBoxButtons.OK, icon: MessageBoxIcon.Error);
+				return;
+			}
+			// Check if the selected voice is valid
+			if (string.IsNullOrEmpty(value: listBoxVoices.SelectedItem.ToString()))
+			{
+				// Show a message box if the selected voice is invalid
+				_ = MessageBox.Show(text: "The selected voice is invalid. Please select a valid voice before saving to a file.", caption: "Error", buttons: MessageBoxButtons.OK, icon: MessageBoxIcon.Error);
+				return;
+			}
+			// Set the synthesizer to use the selected voice
+			if (saveFileDialogWaveFile.ShowDialog() == DialogResult.OK)
+			{
+				// Get the selected file path from the SaveFileDialog
+				string selectedFilePath = saveFileDialogWaveFile.FileName;
+				// Set the output of the synthesizer to the selected WAV file
+				synthesizer.SetOutputToWaveFile(path: selectedFilePath);
+				// Speak the text asynchronously and save it to the WAV file
+				_ = synthesizer.SpeakAsync(textToSpeak: textBox.Text);
+				// Show a message box indicating that the file has been saved
+				_ = MessageBox.Show(text: $"The speech has been saved to {selectedFilePath}", caption: "Success", buttons: MessageBoxButtons.OK, icon: MessageBoxIcon.Information);
+			}
+			else
+			{
+				// Show a message box if the user cancels the SaveFileDialog
+				_ = MessageBox.Show(text: "The save operation was canceled.", caption: "Canceled", buttons: MessageBoxButtons.OK, icon: MessageBoxIcon.Information);
+			}
 		}
 	}
 }
