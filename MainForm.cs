@@ -196,6 +196,8 @@ namespace TextSpeecher
 					buttonSpeak.Enabled = true;
 					buttonPause.Enabled = false;
 					buttonStop.Enabled = false;
+					buttonSpeakTextFile.Enabled = true;
+					buttonPlaySsmlFile.Enabled = true;
 					buttonClearText.Enabled = true;
 					buttonSaveAsWavFile.Enabled = true;
 					listBoxVoices.Enabled = true;
@@ -210,6 +212,8 @@ namespace TextSpeecher
 					buttonSpeak.Enabled = false;
 					buttonPause.Enabled = true;
 					buttonStop.Enabled = true;
+					buttonSpeakTextFile.Enabled = false;
+					buttonPlaySsmlFile.Enabled = false;
 					buttonClearText.Enabled = false;
 					buttonSaveAsWavFile.Enabled = false;
 					listBoxVoices.Enabled = false;
@@ -229,6 +233,8 @@ namespace TextSpeecher
 					buttonSpeak.Enabled = true;
 					buttonPause.Enabled = false;
 					buttonStop.Enabled = false;
+					buttonSpeakTextFile.Enabled = true;
+					buttonPlaySsmlFile.Enabled = true;
 					buttonClearText.Enabled = true;
 					buttonSaveAsWavFile.Enabled = true;
 					listBoxVoices.Enabled = true;
@@ -395,7 +401,6 @@ namespace TextSpeecher
 		{
 			SetStatusBar(text: "Play a SSML file", additionalInfo: "");
 		}
-
 
 		#endregion
 
