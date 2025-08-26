@@ -42,11 +42,13 @@
             buttonStop = new Button();
             buttonShowVoiceInfo = new Button();
             buttonSaveAsWavFile = new Button();
+            buttonPlaySsmlFile = new Button();
             labelComputerVoice = new Label();
             statusStrip = new StatusStrip();
             labelStatus = new ToolStripStatusLabel();
             buttonClearText = new Button();
             saveFileDialogWaveFile = new SaveFileDialog();
+            openFileDialogSsmlFile = new OpenFileDialog();
             ((System.ComponentModel.ISupportInitialize)trackBarVolume).BeginInit();
             ((System.ComponentModel.ISupportInitialize)trackBarSpeechRate).BeginInit();
             statusStrip.SuspendLayout();
@@ -57,13 +59,13 @@
             textBox.AccessibleDescription = "Enter text to speak";
             textBox.AccessibleName = "text box to speak";
             textBox.AccessibleRole = AccessibleRole.Text;
-            textBox.Location = new Point(12, 12);
+            textBox.Location = new Point(12, 45);
             textBox.Multiline = true;
             textBox.Name = "textBox";
             textBox.PlaceholderText = "Please enter text to speak.";
             textBox.ScrollBars = ScrollBars.Vertical;
-            textBox.Size = new Size(335, 166);
-            textBox.TabIndex = 0;
+            textBox.Size = new Size(335, 133);
+            textBox.TabIndex = 1;
             textBox.Text = "Text to speak";
             textBox.TextChanged += TextBox_TextChanged;
             textBox.Enter += TextBox_Enter;
@@ -172,7 +174,7 @@
             listBoxVoices.Location = new Point(12, 214);
             listBoxVoices.Name = "listBoxVoices";
             listBoxVoices.Size = new Size(171, 94);
-            listBoxVoices.TabIndex = 2;
+            listBoxVoices.TabIndex = 3;
             toolTip.SetToolTip(listBoxVoices, "List of installed comuter voices");
             listBoxVoices.Enter += ListBoxVoices_Enter;
             listBoxVoices.Leave += ClearStatusBar_Leave;
@@ -263,6 +265,23 @@
             buttonSaveAsWavFile.MouseEnter += ButtonSaveAsWavFile_Enter;
             buttonSaveAsWavFile.MouseLeave += ClearStatusBar_Leave;
             // 
+            // buttonPlaySsmlFile
+            // 
+            buttonPlaySsmlFile.AccessibleDescription = "Play a SSML file";
+            buttonPlaySsmlFile.AccessibleName = "Play SSML file";
+            buttonPlaySsmlFile.AccessibleRole = AccessibleRole.PushButton;
+            buttonPlaySsmlFile.Image = Properties.Resources.page_code;
+            buttonPlaySsmlFile.ImageAlign = ContentAlignment.MiddleRight;
+            buttonPlaySsmlFile.Location = new Point(12, 12);
+            buttonPlaySsmlFile.Name = "buttonPlaySsmlFile";
+            buttonPlaySsmlFile.Size = new Size(335, 27);
+            buttonPlaySsmlFile.TabIndex = 0;
+            buttonPlaySsmlFile.Text = "Play SSML file";
+            buttonPlaySsmlFile.TextImageRelation = TextImageRelation.ImageBeforeText;
+            toolTip.SetToolTip(buttonPlaySsmlFile, "Play SSML file");
+            buttonPlaySsmlFile.UseVisualStyleBackColor = true;
+            buttonPlaySsmlFile.Click += ButtonPlaySsmlFile_Click;
+            // 
             // labelComputerVoice
             // 
             labelComputerVoice.AccessibleDescription = "label for computer voices";
@@ -272,7 +291,7 @@
             labelComputerVoice.Location = new Point(12, 190);
             labelComputerVoice.Name = "labelComputerVoice";
             labelComputerVoice.Size = new Size(157, 15);
-            labelComputerVoice.TabIndex = 1;
+            labelComputerVoice.TabIndex = 2;
             labelComputerVoice.Text = "Installed Computer Coice(s):";
             labelComputerVoice.Enter += LabelComputerVoice_Enter;
             labelComputerVoice.Leave += ClearStatusBar_Leave;
@@ -291,7 +310,7 @@
             statusStrip.ShowItemToolTips = true;
             statusStrip.Size = new Size(359, 22);
             statusStrip.SizingGrip = false;
-            statusStrip.TabIndex = 0;
+            statusStrip.TabIndex = 14;
             statusStrip.TabStop = true;
             statusStrip.Text = "statusStrip";
             // 
@@ -330,6 +349,11 @@
             saveFileDialogWaveFile.DefaultExt = "wav";
             saveFileDialogWaveFile.Filter = "WAV file|*.wav";
             // 
+            // openFileDialogSsmlFile
+            // 
+            openFileDialogSsmlFile.DefaultExt = "ssml";
+            openFileDialogSsmlFile.Filter = "SSML file|*.ssml";
+            // 
             // MainForm
             // 
             AccessibleDescription = "This is the application window.";
@@ -338,6 +362,7 @@
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(359, 417);
+            Controls.Add(buttonPlaySsmlFile);
             Controls.Add(buttonSaveAsWavFile);
             Controls.Add(buttonClearText);
             Controls.Add(statusStrip);
@@ -386,5 +411,7 @@
 		private Button buttonClearText;
 		private Button buttonSaveAsWavFile;
 		private SaveFileDialog saveFileDialogWaveFile;
-	}
+        private Button buttonPlaySsmlFile;
+        private OpenFileDialog openFileDialogSsmlFile;
+    }
 }
