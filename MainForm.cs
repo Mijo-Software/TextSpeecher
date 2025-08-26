@@ -386,6 +386,17 @@ namespace TextSpeecher
 			SetStatusBar(text: "Speak the entered text.", additionalInfo: "");
 		}
 
+		private void ButtonSpeakTextFile_Enter(object sender, EventArgs e)
+		{
+			SetStatusBar(text: "Open and speak text file", additionalInfo: "");
+		}
+
+		private void ButtonPlaySsmlFile_Enter(object sender, EventArgs e)
+		{
+			SetStatusBar(text: "Play a SSML file", additionalInfo: "");
+		}
+
+
 		#endregion
 
 		#region Leave event handlers
@@ -633,9 +644,27 @@ namespace TextSpeecher
 			{
 				try
 				{
-					string ssmlInhalt = File.ReadAllText(path: openFileDialogSsmlFile.FileName);
+					string ssmlIssue = File.ReadAllText(path: openFileDialogSsmlFile.FileName);
+					textBox.Text = ssmlIssue;
 					synthesizer.SpeakAsyncCancelAll();
-					_ = synthesizer.SpeakSsmlAsync(textToSpeak: ssmlInhalt);
+					_ = synthesizer.SpeakSsmlAsync(textToSpeak: ssmlIssue);
+				}
+				catch (Exception ex)
+				{
+					_ = MessageBox.Show(text: $"Error while reading:\n{ex.Message}", caption: "error", buttons: MessageBoxButtons.OK, icon: MessageBoxIcon.Error);
+				}
+			}
+		}
+
+		private void ButtonSpeakTextFile_Click(object sender, EventArgs e)
+		{
+			if (openFileDialogTextFile.ShowDialog() == DialogResult.OK)
+			{
+				try
+				{
+					textBox.Text = File.ReadAllText(path: openFileDialogTextFile.FileName);
+					synthesizer.SpeakAsyncCancelAll();
+					_ = synthesizer.SpeakAsync(textToSpeak: textBox.Text);
 				}
 				catch (Exception ex)
 				{
