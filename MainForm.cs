@@ -1,4 +1,5 @@
-﻿using System.Speech.AudioFormat;
+﻿using System.Security.Cryptography;
+using System.Speech.AudioFormat;
 using System.Speech.Synthesis;
 
 // Import necessary namespaces
@@ -626,6 +627,23 @@ namespace TextSpeecher
             {
                 // Show a message box if the user cancels the SaveFileDialog
                 _ = MessageBox.Show(text: "The save operation was canceled.", caption: "Canceled", buttons: MessageBoxButtons.OK, icon: MessageBoxIcon.Information);
+            }
+        }
+
+        private void ButtonPlaySsmlFile_Click(object sender, EventArgs e)
+        {
+            if (openFileDialogSsmlFile.ShowDialog() == DialogResult.OK)
+            {
+                try
+                {
+                    string ssmlInhalt = File.ReadAllText(path: openFileDialogSsmlFile.FileName);
+                    synthesizer.SpeakAsyncCancelAll();
+                    synthesizer.SpeakSsmlAsync(textToSpeak: ssmlInhalt);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(text: $"Error while reading:\n{ex.Message}", caption: "error", buttons: MessageBoxButtons.OK, icon: MessageBoxIcon.Error);
+                }
             }
         }
     }
