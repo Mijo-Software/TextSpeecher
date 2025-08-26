@@ -44,6 +44,7 @@
 			buttonSaveAsWavFile = new Button();
 			buttonPlaySsmlFile = new Button();
 			buttonSpeakTextFile = new Button();
+			checkBoxEnableSsmlMode = new CheckBox();
 			labelComputerVoice = new Label();
 			statusStrip = new StatusStrip();
 			labelStatus = new ToolStripStatusLabel();
@@ -66,7 +67,7 @@
 			textBox.Name = "textBox";
 			textBox.PlaceholderText = "Please enter text to speak.";
 			textBox.ScrollBars = ScrollBars.Vertical;
-			textBox.Size = new Size(335, 133);
+			textBox.Size = new Size(335, 122);
 			textBox.TabIndex = 2;
 			textBox.Text = "Text to speak";
 			textBox.TextChanged += TextBox_TextChanged;
@@ -85,7 +86,7 @@
 			buttonSpeak.Location = new Point(12, 357);
 			buttonSpeak.Name = "buttonSpeak";
 			buttonSpeak.Size = new Size(67, 27);
-			buttonSpeak.TabIndex = 11;
+			buttonSpeak.TabIndex = 12;
 			buttonSpeak.Text = "Speak";
 			buttonSpeak.TextImageRelation = TextImageRelation.ImageBeforeText;
 			toolTip.SetToolTip(buttonSpeak, "Speak");
@@ -105,7 +106,7 @@
 			trackBarVolume.Maximum = 100;
 			trackBarVolume.Name = "trackBarVolume";
 			trackBarVolume.Size = new Size(158, 45);
-			trackBarVolume.TabIndex = 7;
+			trackBarVolume.TabIndex = 8;
 			trackBarVolume.TickFrequency = 5;
 			trackBarVolume.TickStyle = TickStyle.Both;
 			toolTip.SetToolTip(trackBarVolume, "volume");
@@ -124,7 +125,7 @@
 			labelVolume.Location = new Point(189, 190);
 			labelVolume.Name = "labelVolume";
 			labelVolume.Size = new Size(50, 15);
-			labelVolume.TabIndex = 6;
+			labelVolume.TabIndex = 7;
 			labelVolume.Text = "volume:";
 			labelVolume.Enter += LabelVolume_Enter;
 			labelVolume.Leave += ClearStatusBar_Leave;
@@ -140,7 +141,7 @@
 			labelSpeechRate.Location = new Point(189, 256);
 			labelSpeechRate.Name = "labelSpeechRate";
 			labelSpeechRate.Size = new Size(70, 15);
-			labelSpeechRate.TabIndex = 8;
+			labelSpeechRate.TabIndex = 9;
 			labelSpeechRate.Text = "speech rate:";
 			labelSpeechRate.Enter += LabelSpeechRate_Enter;
 			labelSpeechRate.Leave += ClearStatusBar_Leave;
@@ -157,7 +158,7 @@
 			trackBarSpeechRate.Minimum = -10;
 			trackBarSpeechRate.Name = "trackBarSpeechRate";
 			trackBarSpeechRate.Size = new Size(158, 45);
-			trackBarSpeechRate.TabIndex = 9;
+			trackBarSpeechRate.TabIndex = 10;
 			trackBarSpeechRate.TickFrequency = 2;
 			trackBarSpeechRate.TickStyle = TickStyle.Both;
 			toolTip.SetToolTip(trackBarSpeechRate, "speech rate");
@@ -176,7 +177,7 @@
 			listBoxVoices.Location = new Point(12, 214);
 			listBoxVoices.Name = "listBoxVoices";
 			listBoxVoices.Size = new Size(171, 94);
-			listBoxVoices.TabIndex = 4;
+			listBoxVoices.TabIndex = 5;
 			toolTip.SetToolTip(listBoxVoices, "List of installed comuter voices");
 			listBoxVoices.Enter += ListBoxVoices_Enter;
 			listBoxVoices.Leave += ClearStatusBar_Leave;
@@ -193,7 +194,7 @@
 			buttonPause.Location = new Point(85, 357);
 			buttonPause.Name = "buttonPause";
 			buttonPause.Size = new Size(76, 27);
-			buttonPause.TabIndex = 12;
+			buttonPause.TabIndex = 13;
 			buttonPause.Text = "Pause";
 			buttonPause.TextImageRelation = TextImageRelation.ImageBeforeText;
 			toolTip.SetToolTip(buttonPause, "Pause/Resume");
@@ -214,7 +215,7 @@
 			buttonStop.Location = new Point(167, 357);
 			buttonStop.Name = "buttonStop";
 			buttonStop.Size = new Size(67, 27);
-			buttonStop.TabIndex = 13;
+			buttonStop.TabIndex = 14;
 			buttonStop.Text = "Stop";
 			buttonStop.TextImageRelation = TextImageRelation.ImageBeforeText;
 			toolTip.SetToolTip(buttonStop, "Stop");
@@ -235,7 +236,7 @@
 			buttonShowVoiceInfo.Location = new Point(12, 314);
 			buttonShowVoiceInfo.Name = "buttonShowVoiceInfo";
 			buttonShowVoiceInfo.Size = new Size(171, 27);
-			buttonShowVoiceInfo.TabIndex = 5;
+			buttonShowVoiceInfo.TabIndex = 6;
 			buttonShowVoiceInfo.Text = "Voice Info";
 			buttonShowVoiceInfo.TextImageRelation = TextImageRelation.ImageBeforeText;
 			toolTip.SetToolTip(buttonShowVoiceInfo, "voice info");
@@ -256,7 +257,7 @@
 			buttonSaveAsWavFile.Location = new Point(240, 357);
 			buttonSaveAsWavFile.Name = "buttonSaveAsWavFile";
 			buttonSaveAsWavFile.Size = new Size(78, 27);
-			buttonSaveAsWavFile.TabIndex = 14;
+			buttonSaveAsWavFile.TabIndex = 15;
 			buttonSaveAsWavFile.Text = "Wav File";
 			buttonSaveAsWavFile.TextImageRelation = TextImageRelation.ImageBeforeText;
 			toolTip.SetToolTip(buttonSaveAsWavFile, "Save as WAV file");
@@ -301,13 +302,31 @@
 			buttonSpeakTextFile.TabIndex = 0;
 			buttonSpeakTextFile.Text = "Open and speak text file";
 			buttonSpeakTextFile.TextImageRelation = TextImageRelation.ImageBeforeText;
-			toolTip.SetToolTip(buttonSpeakTextFile, "Play SSML file");
+			toolTip.SetToolTip(buttonSpeakTextFile, "Open and speak text file");
 			buttonSpeakTextFile.UseVisualStyleBackColor = true;
 			buttonSpeakTextFile.Click += ButtonSpeakTextFile_Click;
 			buttonSpeakTextFile.Enter += ButtonSpeakTextFile_Enter;
 			buttonSpeakTextFile.Leave += ClearStatusBar_Leave;
 			buttonSpeakTextFile.MouseEnter += ButtonSpeakTextFile_Enter;
 			buttonSpeakTextFile.MouseLeave += ClearStatusBar_Leave;
+			// 
+			// checkBoxEnableSsmlMode
+			// 
+			checkBoxEnableSsmlMode.AccessibleDescription = "Enable the SSML mode";
+			checkBoxEnableSsmlMode.AccessibleName = "Enable SSML mode";
+			checkBoxEnableSsmlMode.AccessibleRole = AccessibleRole.CheckButton;
+			checkBoxEnableSsmlMode.AutoSize = true;
+			checkBoxEnableSsmlMode.Location = new Point(12, 168);
+			checkBoxEnableSsmlMode.Name = "checkBoxEnableSsmlMode";
+			checkBoxEnableSsmlMode.Size = new Size(127, 19);
+			checkBoxEnableSsmlMode.TabIndex = 3;
+			checkBoxEnableSsmlMode.Text = "Enable SSML mode";
+			toolTip.SetToolTip(checkBoxEnableSsmlMode, "Enable SSML mode");
+			checkBoxEnableSsmlMode.UseVisualStyleBackColor = true;
+			checkBoxEnableSsmlMode.Enter += CheckBoxEnableSsmlMode_Enter;
+			checkBoxEnableSsmlMode.Leave += ClearStatusBar_Leave;
+			checkBoxEnableSsmlMode.MouseEnter += CheckBoxEnableSsmlMode_Enter;
+			checkBoxEnableSsmlMode.MouseLeave += ClearStatusBar_Leave;
 			// 
 			// labelComputerVoice
 			// 
@@ -318,7 +337,7 @@
 			labelComputerVoice.Location = new Point(12, 190);
 			labelComputerVoice.Name = "labelComputerVoice";
 			labelComputerVoice.Size = new Size(157, 15);
-			labelComputerVoice.TabIndex = 3;
+			labelComputerVoice.TabIndex = 4;
 			labelComputerVoice.Text = "Installed Computer Coice(s):";
 			labelComputerVoice.Enter += LabelComputerVoice_Enter;
 			labelComputerVoice.Leave += ClearStatusBar_Leave;
@@ -337,7 +356,7 @@
 			statusStrip.ShowItemToolTips = true;
 			statusStrip.Size = new Size(359, 22);
 			statusStrip.SizingGrip = false;
-			statusStrip.TabIndex = 15;
+			statusStrip.TabIndex = 16;
 			statusStrip.TabStop = true;
 			statusStrip.Text = "statusStrip";
 			// 
@@ -361,7 +380,7 @@
 			buttonClearText.Location = new Point(189, 314);
 			buttonClearText.Name = "buttonClearText";
 			buttonClearText.Size = new Size(116, 27);
-			buttonClearText.TabIndex = 10;
+			buttonClearText.TabIndex = 11;
 			buttonClearText.Text = "Clear text";
 			buttonClearText.TextImageRelation = TextImageRelation.ImageBeforeText;
 			buttonClearText.UseVisualStyleBackColor = true;
@@ -394,6 +413,7 @@
 			AutoScaleDimensions = new SizeF(7F, 15F);
 			AutoScaleMode = AutoScaleMode.Font;
 			ClientSize = new Size(359, 417);
+			Controls.Add(checkBoxEnableSsmlMode);
 			Controls.Add(buttonSpeakTextFile);
 			Controls.Add(buttonPlaySsmlFile);
 			Controls.Add(buttonSaveAsWavFile);
@@ -448,5 +468,6 @@
         private OpenFileDialog openFileDialogTextFile;
 		private Button buttonSpeakTextFile;
 		private OpenFileDialog openFileDialogSsmlFile;
+		private CheckBox checkBoxEnableSsmlMode;
 	}
 }

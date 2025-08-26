@@ -204,6 +204,7 @@ namespace TextSpeecher
 					trackBarVolume.Enabled = true;
 					trackBarSpeechRate.Enabled = true;
 					trackBarSpeechRate.Enabled = true;
+					checkBoxEnableSsmlMode.Enabled = true;
 					labelStatus.Text = string.Empty;
 					break;
 				case SynthesizerState.Speaking:
@@ -219,6 +220,7 @@ namespace TextSpeecher
 					listBoxVoices.Enabled = false;
 					trackBarVolume.Enabled = false;
 					trackBarSpeechRate.Enabled = false;
+					checkBoxEnableSsmlMode.Enabled = false;
 					break;
 				case SynthesizerState.Paused:
 					// When paused, disable Speak button, enable Pause button, and disable Stop button
@@ -240,6 +242,7 @@ namespace TextSpeecher
 					listBoxVoices.Enabled = true;
 					trackBarVolume.Enabled = true;
 					trackBarSpeechRate.Enabled = true;
+					checkBoxEnableSsmlMode.Enabled = true;
 					labelStatus.Text = string.Empty;
 					break;
 			}
@@ -402,6 +405,11 @@ namespace TextSpeecher
 			SetStatusBar(text: "Play a SSML file", additionalInfo: "");
 		}
 
+		private void CheckBoxEnableSsmlMode_Enter(object sender, EventArgs e)
+		{
+			SetStatusBar(text: "Enable the SSML mode", additionalInfo: "");
+		}
+
 		#endregion
 
 		#region Leave event handlers
@@ -484,8 +492,15 @@ namespace TextSpeecher
 			// Check if the text is not empty
 			if (!string.IsNullOrEmpty(value: textToSpeak))
 			{
-				// Speak the text asynchronously
-				_ = synthesizer.SpeakAsync(textToSpeak: textToSpeak);
+				if (checkBoxEnableSsmlMode.Checked)
+				{
+					_ = synthesizer.SpeakSsmlAsync(textToSpeak: textToSpeak);
+				}
+				else
+				{
+					// Speak the text asynchronously
+					_ = synthesizer.SpeakAsync(textToSpeak: textToSpeak);
+				}
 			}
 			else
 			{
