@@ -7,7 +7,7 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <StartupObject>TextSpeecher.Program</StartupObject>
     <GenerateDocumentationFile>True</GenerateDocumentationFile>
-    <Version>1.6.3.18</Version>
+    <Version>1.7.0.20</Version>
     <ApplicationIcon>TextSpeecher_logo.ico</ApplicationIcon>
     <Title>TextSpeecher</Title>
     <Description>TextSpeecher is a small program that reads text aloud.

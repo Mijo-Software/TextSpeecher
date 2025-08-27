@@ -113,6 +113,16 @@ namespace TextSpeecher.Properties {
         /// <summary>
         ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap document_import {
+            get {
+                object obj = ResourceManager.GetObject("document_import", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap information {
             get {
                 object obj = ResourceManager.GetObject("information", resourceCulture);
@@ -136,6 +146,36 @@ namespace TextSpeecher.Properties {
         internal static System.Drawing.Bitmap page_go {
             get {
                 object obj = ResourceManager.GetObject("page_go", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap page_white_code {
+            get {
+                object obj = ResourceManager.GetObject("page_white_code", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap page_white_text {
+            get {
+                object obj = ResourceManager.GetObject("page_white_text", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap paste_plain {
+            get {
+                object obj = ResourceManager.GetObject("paste_plain", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
