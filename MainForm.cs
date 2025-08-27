@@ -739,6 +739,36 @@ namespace TextSpeecher
 			textBox.Text = clipboardText;
 			_ = synthesizer.SpeakAsync(textToSpeak: clipboardText);
 		}
+
+		private void MainForm_DragDrop(object sender, DragEventArgs e)
+		{
+			try
+			{
+				// Retrieve files
+				string[]? files = e.Data.GetData(format: DataFormats.FileDrop) as string[];
+
+				if (files.Length > 0)
+				{
+					string filePath = files[0];
+
+					// Check if the file exists
+					if (File.Exists(path: filePath))
+					{
+						// Load text content and display it in TextBox
+						string content = File.ReadAllText(path: filePath);
+						textBox.Text = content;
+					}
+					else
+					{
+						_ = MessageBox.Show(text: "The selected file no longer exists.", caption: "Error", buttons: MessageBoxButtons.OK, icon: MessageBoxIcon.Error);
+					}
+				}
+			}
+			catch (Exception ex)
+			{
+				_ = MessageBox.Show(text: $"Error loading file:\n{ex.Message}", caption: "Error", buttons: MessageBoxButtons.OK, icon: MessageBoxIcon.Error);
+			}
+		}
 	}
 
 	#endregion
