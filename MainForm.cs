@@ -769,6 +769,12 @@ namespace TextSpeecher
 				_ = MessageBox.Show(text: $"Error loading file:\n{ex.Message}", caption: "Error", buttons: MessageBoxButtons.OK, icon: MessageBoxIcon.Error);
 			}
 		}
+
+		private void MainForm_DragEnter(object sender, DragEventArgs e)
+		{
+			// Check if a file is being dragged
+			e.Effect = e.Data.GetDataPresent(format: DataFormats.FileDrop) ? DragDropEffects.Copy : DragDropEffects.None;
+		}
 	}
 
 	#endregion

@@ -66,7 +66,6 @@
 			textBox.AccessibleDescription = "Enter text to speak";
 			textBox.AccessibleName = "text box to speak";
 			textBox.AccessibleRole = AccessibleRole.Text;
-			textBox.AllowDrop = true;
 			textBox.Location = new Point(12, 45);
 			textBox.Multiline = true;
 			textBox.Name = "textBox";
@@ -487,6 +486,7 @@
 			Text = "TextSpeecher";
 			Load += MainForm_Load;
 			DragDrop += MainForm_DragDrop;
+			DragEnter += MainForm_DragEnter;
 			((System.ComponentModel.ISupportInitialize)trackBarVolume).EndInit();
 			((System.ComponentModel.ISupportInitialize)trackBarSpeechRate).EndInit();
 			contextMenuStripImportSource.ResumeLayout(false);
