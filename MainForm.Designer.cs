@@ -66,6 +66,7 @@
 			textBox.AccessibleDescription = "Enter text to speak";
 			textBox.AccessibleName = "text box to speak";
 			textBox.AccessibleRole = AccessibleRole.Text;
+			textBox.AllowDrop = true;
 			textBox.Location = new Point(12, 45);
 			textBox.Multiline = true;
 			textBox.Name = "textBox";
@@ -284,7 +285,6 @@
 			checkBoxEnableSsmlMode.AccessibleDescription = "Enable the SSML mode";
 			checkBoxEnableSsmlMode.AccessibleName = "Enable SSML mode";
 			checkBoxEnableSsmlMode.AccessibleRole = AccessibleRole.CheckButton;
-			checkBoxEnableSsmlMode.AutoEllipsis = true;
 			checkBoxEnableSsmlMode.AutoSize = true;
 			checkBoxEnableSsmlMode.Location = new Point(12, 168);
 			checkBoxEnableSsmlMode.Name = "checkBoxEnableSsmlMode";
@@ -486,6 +486,7 @@
 			StartPosition = FormStartPosition.CenterScreen;
 			Text = "TextSpeecher";
 			Load += MainForm_Load;
+			DragDrop += MainForm_DragDrop;
 			((System.ComponentModel.ISupportInitialize)trackBarVolume).EndInit();
 			((System.ComponentModel.ISupportInitialize)trackBarSpeechRate).EndInit();
 			contextMenuStripImportSource.ResumeLayout(false);
