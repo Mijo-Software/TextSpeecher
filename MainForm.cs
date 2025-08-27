@@ -57,7 +57,6 @@ namespace TextSpeecher
 			return words.Length;
 		}
 
-
 		// Method to count installed voices
 		private int CountInstalledVoice()
 		{
@@ -81,7 +80,6 @@ namespace TextSpeecher
 				return 0;
 			}
 		}
-
 
 		// Method to load installed voices into the ListBox
 		private void LoadInstalledVoicesToListBox()
@@ -129,6 +127,25 @@ namespace TextSpeecher
 				_ = MessageBox.Show(text: "The ListBox control was not found.", caption: "Error", buttons: MessageBoxButtons.OK, icon: MessageBoxIcon.Error);
 			}
 		}
+
+		/// <summary>
+		/// Checks whether text is present in the clipboard and returns it.
+		/// </summary>
+		/// <returns>The text from the clipboard or null if none exists.</returns>
+		private static string? GetClipboardText()
+		{
+			try
+			{
+				return Clipboard.ContainsText() ? Clipboard.GetText() : null;
+			}
+			catch (Exception ex)
+			{
+				// If the clipboard is not accessible
+				_ = MessageBox.Show(text: $"Fehler beim Zugriff auf die Zwischenablage:\n{ex.Message}", caption: "Fehler", buttons: MessageBoxButtons.OK, icon: MessageBoxIcon.Error);
+				return null;
+			}
+		}
+
 
 		#endregion
 
@@ -196,8 +213,7 @@ namespace TextSpeecher
 					buttonSpeak.Enabled = true;
 					buttonPause.Enabled = false;
 					buttonStop.Enabled = false;
-					buttonSpeakTextFile.Enabled = true;
-					buttonPlaySsmlFile.Enabled = true;
+					contextMenuStripImportSource.Enabled = true;
 					buttonClearText.Enabled = true;
 					buttonSaveAsWavFile.Enabled = true;
 					listBoxVoices.Enabled = true;
@@ -213,8 +229,7 @@ namespace TextSpeecher
 					buttonSpeak.Enabled = false;
 					buttonPause.Enabled = true;
 					buttonStop.Enabled = true;
-					buttonSpeakTextFile.Enabled = false;
-					buttonPlaySsmlFile.Enabled = false;
+					contextMenuStripImportSource.Enabled = false;
 					buttonClearText.Enabled = false;
 					buttonSaveAsWavFile.Enabled = false;
 					listBoxVoices.Enabled = false;
@@ -235,8 +250,7 @@ namespace TextSpeecher
 					buttonSpeak.Enabled = true;
 					buttonPause.Enabled = false;
 					buttonStop.Enabled = false;
-					buttonSpeakTextFile.Enabled = true;
-					buttonPlaySsmlFile.Enabled = true;
+					contextMenuStripImportSource.Enabled = true;
 					buttonClearText.Enabled = true;
 					buttonSaveAsWavFile.Enabled = true;
 					listBoxVoices.Enabled = true;
@@ -395,19 +409,29 @@ namespace TextSpeecher
 			SetStatusBar(text: "Speak the entered text.", additionalInfo: "");
 		}
 
-		private void ButtonSpeakTextFile_Enter(object sender, EventArgs e)
-		{
-			SetStatusBar(text: "Open and speak text file", additionalInfo: "");
-		}
-
-		private void ButtonPlaySsmlFile_Enter(object sender, EventArgs e)
-		{
-			SetStatusBar(text: "Play a SSML file", additionalInfo: "");
-		}
-
 		private void CheckBoxEnableSsmlMode_Enter(object sender, EventArgs e)
 		{
 			SetStatusBar(text: "Enable the SSML mode", additionalInfo: "");
+		}
+
+		private void ButtonImport_Enter(object sender, EventArgs e)
+		{
+			SetStatusBar(text: "Import a text source", additionalInfo: "");
+		}
+
+		private void ToolStripMenuItemImportFromClipboard_MouseEnter(object sender, EventArgs e)
+		{
+			SetStatusBar(text: "Import from clipboard", additionalInfo: "");
+		}
+
+		private void ToolStripMenuItemImportTextFile_MouseEnter(object sender, EventArgs e)
+		{
+			SetStatusBar(text: "Import text file", additionalInfo: "");
+		}
+
+		private void ToolStripMenuItemImportSsmlFile_MouseEnter(object sender, EventArgs e)
+		{
+			SetStatusBar(text: "Import SSML file", additionalInfo: "");
 		}
 
 		#endregion
@@ -658,7 +682,35 @@ namespace TextSpeecher
 			}
 		}
 
-		private void ButtonPlaySsmlFile_Click(object sender, EventArgs e)
+		private void ButtonImport_Click(object sender, EventArgs e)
+		{
+			if (sender is Button button && contextMenuStripImportSource != null)
+			{
+				// Calculate position directly below the button
+				Point point = button.PointToScreen(p: new Point(x: 0, y: button.Height));
+				// Show context menu at the calculated position
+				contextMenuStripImportSource.Show(screenLocation: point);
+			}
+		}
+
+		private void ToolStripMenuItemImportTextFile_Click(object sender, EventArgs e)
+		{
+			if (openFileDialogTextFile.ShowDialog() == DialogResult.OK)
+			{
+				try
+				{
+					textBox.Text = File.ReadAllText(path: openFileDialogTextFile.FileName);
+					synthesizer.SpeakAsyncCancelAll();
+					_ = synthesizer.SpeakAsync(textToSpeak: textBox.Text);
+				}
+				catch (Exception ex)
+				{
+					_ = MessageBox.Show(text: $"Error while reading:\n{ex.Message}", caption: "error", buttons: MessageBoxButtons.OK, icon: MessageBoxIcon.Error);
+				}
+			}
+		}
+
+		private void ToolStripMenuItemImportSsmlFile_Click(object sender, EventArgs e)
 		{
 			if (openFileDialogSsmlFile.ShowDialog() == DialogResult.OK)
 			{
@@ -676,21 +728,16 @@ namespace TextSpeecher
 			}
 		}
 
-		private void ButtonSpeakTextFile_Click(object sender, EventArgs e)
+		private void ToolStripMenuItemImportFromClipboard_Click(object sender, EventArgs e)
 		{
-			if (openFileDialogTextFile.ShowDialog() == DialogResult.OK)
+			string clipboardText = GetClipboardText();
+			if (string.IsNullOrEmpty(value: clipboardText))
 			{
-				try
-				{
-					textBox.Text = File.ReadAllText(path: openFileDialogTextFile.FileName);
-					synthesizer.SpeakAsyncCancelAll();
-					_ = synthesizer.SpeakAsync(textToSpeak: textBox.Text);
-				}
-				catch (Exception ex)
-				{
-					_ = MessageBox.Show(text: $"Error while reading:\n{ex.Message}", caption: "error", buttons: MessageBoxButtons.OK, icon: MessageBoxIcon.Error);
-				}
+				return;
 			}
+			synthesizer.SpeakAsyncCancelAll();
+			textBox.Text = clipboardText;
+			_ = synthesizer.SpeakAsync(textToSpeak: clipboardText);
 		}
 	}
 

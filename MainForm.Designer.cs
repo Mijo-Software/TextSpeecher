@@ -42,9 +42,12 @@
 			buttonStop = new Button();
 			buttonShowVoiceInfo = new Button();
 			buttonSaveAsWavFile = new Button();
-			buttonPlaySsmlFile = new Button();
-			buttonSpeakTextFile = new Button();
 			checkBoxEnableSsmlMode = new CheckBox();
+			buttonImport = new Button();
+			contextMenuStripImportSource = new ContextMenuStrip(components);
+			toolStripMenuItemImportFromClipboard = new ToolStripMenuItem();
+			toolStripMenuItemImportTextFile = new ToolStripMenuItem();
+			toolStripMenuItemImportSsmlFile = new ToolStripMenuItem();
 			labelComputerVoice = new Label();
 			statusStrip = new StatusStrip();
 			labelStatus = new ToolStripStatusLabel();
@@ -54,6 +57,7 @@
 			openFileDialogSsmlFile = new OpenFileDialog();
 			((System.ComponentModel.ISupportInitialize)trackBarVolume).BeginInit();
 			((System.ComponentModel.ISupportInitialize)trackBarSpeechRate).BeginInit();
+			contextMenuStripImportSource.SuspendLayout();
 			statusStrip.SuspendLayout();
 			SuspendLayout();
 			// 
@@ -81,12 +85,13 @@
 			buttonSpeak.AccessibleDescription = "Speak the text";
 			buttonSpeak.AccessibleName = "Speak button";
 			buttonSpeak.AccessibleRole = AccessibleRole.PushButton;
+			buttonSpeak.AutoEllipsis = true;
 			buttonSpeak.Image = Properties.Resources.control_play_blue;
 			buttonSpeak.ImageAlign = ContentAlignment.MiddleRight;
 			buttonSpeak.Location = new Point(12, 357);
 			buttonSpeak.Name = "buttonSpeak";
 			buttonSpeak.Size = new Size(67, 27);
-			buttonSpeak.TabIndex = 12;
+			buttonSpeak.TabIndex = 11;
 			buttonSpeak.Text = "Speak";
 			buttonSpeak.TextImageRelation = TextImageRelation.ImageBeforeText;
 			toolTip.SetToolTip(buttonSpeak, "Speak");
@@ -121,6 +126,7 @@
 			labelVolume.AccessibleDescription = "label for the volume";
 			labelVolume.AccessibleName = "volume";
 			labelVolume.AccessibleRole = AccessibleRole.StaticText;
+			labelVolume.AutoEllipsis = true;
 			labelVolume.AutoSize = true;
 			labelVolume.Location = new Point(189, 190);
 			labelVolume.Name = "labelVolume";
@@ -137,6 +143,7 @@
 			labelSpeechRate.AccessibleDescription = "Label for the speech rate";
 			labelSpeechRate.AccessibleName = "speech rate";
 			labelSpeechRate.AccessibleRole = AccessibleRole.StaticText;
+			labelSpeechRate.AutoEllipsis = true;
 			labelSpeechRate.AutoSize = true;
 			labelSpeechRate.Location = new Point(189, 256);
 			labelSpeechRate.Name = "labelSpeechRate";
@@ -189,12 +196,13 @@
 			buttonPause.AccessibleDescription = "Pause and resume the voice";
 			buttonPause.AccessibleName = "Pause/resume button";
 			buttonPause.AccessibleRole = AccessibleRole.PushButton;
+			buttonPause.AutoEllipsis = true;
 			buttonPause.Image = Properties.Resources.control_pause_blue;
 			buttonPause.ImageAlign = ContentAlignment.MiddleRight;
 			buttonPause.Location = new Point(85, 357);
 			buttonPause.Name = "buttonPause";
 			buttonPause.Size = new Size(76, 27);
-			buttonPause.TabIndex = 13;
+			buttonPause.TabIndex = 12;
 			buttonPause.Text = "Pause";
 			buttonPause.TextImageRelation = TextImageRelation.ImageBeforeText;
 			toolTip.SetToolTip(buttonPause, "Pause/Resume");
@@ -210,12 +218,13 @@
 			buttonStop.AccessibleDescription = "Stop the voice";
 			buttonStop.AccessibleName = "Stop";
 			buttonStop.AccessibleRole = AccessibleRole.PushButton;
+			buttonStop.AutoEllipsis = true;
 			buttonStop.Image = Properties.Resources.control_stop_blue;
 			buttonStop.ImageAlign = ContentAlignment.MiddleRight;
 			buttonStop.Location = new Point(167, 357);
 			buttonStop.Name = "buttonStop";
 			buttonStop.Size = new Size(67, 27);
-			buttonStop.TabIndex = 14;
+			buttonStop.TabIndex = 13;
 			buttonStop.Text = "Stop";
 			buttonStop.TextImageRelation = TextImageRelation.ImageBeforeText;
 			toolTip.SetToolTip(buttonStop, "Stop");
@@ -231,6 +240,7 @@
 			buttonShowVoiceInfo.AccessibleDescription = "Show the voice info";
 			buttonShowVoiceInfo.AccessibleName = "voice info";
 			buttonShowVoiceInfo.AccessibleRole = AccessibleRole.PushButton;
+			buttonShowVoiceInfo.AutoEllipsis = true;
 			buttonShowVoiceInfo.Image = Properties.Resources.information;
 			buttonShowVoiceInfo.ImageAlign = ContentAlignment.MiddleRight;
 			buttonShowVoiceInfo.Location = new Point(12, 314);
@@ -252,12 +262,13 @@
 			buttonSaveAsWavFile.AccessibleDescription = "Save the speech into a WAV file";
 			buttonSaveAsWavFile.AccessibleName = "Save as WAV file";
 			buttonSaveAsWavFile.AccessibleRole = AccessibleRole.PushButton;
+			buttonSaveAsWavFile.AutoEllipsis = true;
 			buttonSaveAsWavFile.Image = Properties.Resources.diskette;
 			buttonSaveAsWavFile.ImageAlign = ContentAlignment.MiddleRight;
 			buttonSaveAsWavFile.Location = new Point(240, 357);
 			buttonSaveAsWavFile.Name = "buttonSaveAsWavFile";
 			buttonSaveAsWavFile.Size = new Size(78, 27);
-			buttonSaveAsWavFile.TabIndex = 15;
+			buttonSaveAsWavFile.TabIndex = 14;
 			buttonSaveAsWavFile.Text = "Wav File";
 			buttonSaveAsWavFile.TextImageRelation = TextImageRelation.ImageBeforeText;
 			toolTip.SetToolTip(buttonSaveAsWavFile, "Save as WAV file");
@@ -268,53 +279,12 @@
 			buttonSaveAsWavFile.MouseEnter += ButtonSaveAsWavFile_Enter;
 			buttonSaveAsWavFile.MouseLeave += ClearStatusBar_Leave;
 			// 
-			// buttonPlaySsmlFile
-			// 
-			buttonPlaySsmlFile.AccessibleDescription = "Play a SSML file";
-			buttonPlaySsmlFile.AccessibleName = "Play SSML file";
-			buttonPlaySsmlFile.AccessibleRole = AccessibleRole.PushButton;
-			buttonPlaySsmlFile.Image = Properties.Resources.page_code;
-			buttonPlaySsmlFile.ImageAlign = ContentAlignment.MiddleRight;
-			buttonPlaySsmlFile.Location = new Point(189, 12);
-			buttonPlaySsmlFile.Name = "buttonPlaySsmlFile";
-			buttonPlaySsmlFile.Size = new Size(158, 27);
-			buttonPlaySsmlFile.TabIndex = 1;
-			buttonPlaySsmlFile.Text = "Play SSML file";
-			buttonPlaySsmlFile.TextImageRelation = TextImageRelation.ImageBeforeText;
-			toolTip.SetToolTip(buttonPlaySsmlFile, "Play SSML file");
-			buttonPlaySsmlFile.UseVisualStyleBackColor = true;
-			buttonPlaySsmlFile.Click += ButtonPlaySsmlFile_Click;
-			buttonPlaySsmlFile.Enter += ButtonPlaySsmlFile_Enter;
-			buttonPlaySsmlFile.Leave += ClearStatusBar_Leave;
-			buttonPlaySsmlFile.MouseEnter += ButtonPlaySsmlFile_Enter;
-			buttonPlaySsmlFile.MouseLeave += ClearStatusBar_Leave;
-			// 
-			// buttonSpeakTextFile
-			// 
-			buttonSpeakTextFile.AccessibleDescription = "Open and speak text file";
-			buttonSpeakTextFile.AccessibleName = "Open and speak text file";
-			buttonSpeakTextFile.AccessibleRole = AccessibleRole.PushButton;
-			buttonSpeakTextFile.Image = Properties.Resources.page_go;
-			buttonSpeakTextFile.ImageAlign = ContentAlignment.MiddleRight;
-			buttonSpeakTextFile.Location = new Point(12, 12);
-			buttonSpeakTextFile.Name = "buttonSpeakTextFile";
-			buttonSpeakTextFile.Size = new Size(171, 27);
-			buttonSpeakTextFile.TabIndex = 0;
-			buttonSpeakTextFile.Text = "Open and speak text file";
-			buttonSpeakTextFile.TextImageRelation = TextImageRelation.ImageBeforeText;
-			toolTip.SetToolTip(buttonSpeakTextFile, "Open and speak text file");
-			buttonSpeakTextFile.UseVisualStyleBackColor = true;
-			buttonSpeakTextFile.Click += ButtonSpeakTextFile_Click;
-			buttonSpeakTextFile.Enter += ButtonSpeakTextFile_Enter;
-			buttonSpeakTextFile.Leave += ClearStatusBar_Leave;
-			buttonSpeakTextFile.MouseEnter += ButtonSpeakTextFile_Enter;
-			buttonSpeakTextFile.MouseLeave += ClearStatusBar_Leave;
-			// 
 			// checkBoxEnableSsmlMode
 			// 
 			checkBoxEnableSsmlMode.AccessibleDescription = "Enable the SSML mode";
 			checkBoxEnableSsmlMode.AccessibleName = "Enable SSML mode";
 			checkBoxEnableSsmlMode.AccessibleRole = AccessibleRole.CheckButton;
+			checkBoxEnableSsmlMode.AutoEllipsis = true;
 			checkBoxEnableSsmlMode.AutoSize = true;
 			checkBoxEnableSsmlMode.Location = new Point(12, 168);
 			checkBoxEnableSsmlMode.Name = "checkBoxEnableSsmlMode";
@@ -327,6 +297,85 @@
 			checkBoxEnableSsmlMode.Leave += ClearStatusBar_Leave;
 			checkBoxEnableSsmlMode.MouseEnter += CheckBoxEnableSsmlMode_Enter;
 			checkBoxEnableSsmlMode.MouseLeave += ClearStatusBar_Leave;
+			// 
+			// buttonImport
+			// 
+			buttonImport.AccessibleDescription = "Import a text source";
+			buttonImport.AccessibleName = "Import source";
+			buttonImport.AccessibleRole = AccessibleRole.PushButton;
+			buttonImport.AutoEllipsis = true;
+			buttonImport.ContextMenuStrip = contextMenuStripImportSource;
+			buttonImport.Image = Properties.Resources.document_import;
+			buttonImport.ImageAlign = ContentAlignment.MiddleRight;
+			buttonImport.Location = new Point(12, 12);
+			buttonImport.Name = "buttonImport";
+			buttonImport.Size = new Size(117, 27);
+			buttonImport.TabIndex = 0;
+			buttonImport.Text = "Import source";
+			buttonImport.TextImageRelation = TextImageRelation.ImageBeforeText;
+			toolTip.SetToolTip(buttonImport, "Import source");
+			buttonImport.UseVisualStyleBackColor = true;
+			buttonImport.Click += ButtonImport_Click;
+			buttonImport.Enter += ButtonImport_Enter;
+			buttonImport.Leave += ClearStatusBar_Leave;
+			buttonImport.MouseEnter += ButtonImport_Enter;
+			buttonImport.MouseLeave += ClearStatusBar_Leave;
+			// 
+			// contextMenuStripImportSource
+			// 
+			contextMenuStripImportSource.AccessibleDescription = "Import a source";
+			contextMenuStripImportSource.AccessibleName = "Import Source";
+			contextMenuStripImportSource.AccessibleRole = AccessibleRole.MenuPopup;
+			contextMenuStripImportSource.AllowClickThrough = true;
+			contextMenuStripImportSource.AllowDrop = true;
+			contextMenuStripImportSource.Items.AddRange(new ToolStripItem[] { toolStripMenuItemImportFromClipboard, toolStripMenuItemImportTextFile, toolStripMenuItemImportSsmlFile });
+			contextMenuStripImportSource.Name = "contextMenuStripImportSource";
+			contextMenuStripImportSource.Size = new Size(193, 70);
+			contextMenuStripImportSource.TabStop = true;
+			contextMenuStripImportSource.Text = "Import souce";
+			toolTip.SetToolTip(contextMenuStripImportSource, "Import source");
+			// 
+			// toolStripMenuItemImportFromClipboard
+			// 
+			toolStripMenuItemImportFromClipboard.AccessibleDescription = "Import from clipboard";
+			toolStripMenuItemImportFromClipboard.AccessibleName = "Import from clipboard";
+			toolStripMenuItemImportFromClipboard.AccessibleRole = AccessibleRole.MenuItem;
+			toolStripMenuItemImportFromClipboard.AutoToolTip = true;
+			toolStripMenuItemImportFromClipboard.Image = Properties.Resources.paste_plain;
+			toolStripMenuItemImportFromClipboard.Name = "toolStripMenuItemImportFromClipboard";
+			toolStripMenuItemImportFromClipboard.Size = new Size(192, 22);
+			toolStripMenuItemImportFromClipboard.Text = "Import from clipboard";
+			toolStripMenuItemImportFromClipboard.Click += ToolStripMenuItemImportFromClipboard_Click;
+			toolStripMenuItemImportFromClipboard.MouseEnter += ToolStripMenuItemImportFromClipboard_MouseEnter;
+			toolStripMenuItemImportFromClipboard.MouseLeave += ClearStatusBar_Leave;
+			// 
+			// toolStripMenuItemImportTextFile
+			// 
+			toolStripMenuItemImportTextFile.AccessibleDescription = "Open a text file";
+			toolStripMenuItemImportTextFile.AccessibleName = "Open text file";
+			toolStripMenuItemImportTextFile.AccessibleRole = AccessibleRole.MenuItem;
+			toolStripMenuItemImportTextFile.AutoToolTip = true;
+			toolStripMenuItemImportTextFile.Image = Properties.Resources.page_white_text;
+			toolStripMenuItemImportTextFile.Name = "toolStripMenuItemImportTextFile";
+			toolStripMenuItemImportTextFile.Size = new Size(192, 22);
+			toolStripMenuItemImportTextFile.Text = "Import text file";
+			toolStripMenuItemImportTextFile.Click += ToolStripMenuItemImportTextFile_Click;
+			toolStripMenuItemImportTextFile.MouseEnter += ToolStripMenuItemImportTextFile_MouseEnter;
+			toolStripMenuItemImportTextFile.MouseLeave += ClearStatusBar_Leave;
+			// 
+			// toolStripMenuItemImportSsmlFile
+			// 
+			toolStripMenuItemImportSsmlFile.AccessibleDescription = "Open a SSML file";
+			toolStripMenuItemImportSsmlFile.AccessibleName = "Open a SSML file";
+			toolStripMenuItemImportSsmlFile.AccessibleRole = AccessibleRole.MenuItem;
+			toolStripMenuItemImportSsmlFile.AutoToolTip = true;
+			toolStripMenuItemImportSsmlFile.Image = Properties.Resources.page_white_code;
+			toolStripMenuItemImportSsmlFile.Name = "toolStripMenuItemImportSsmlFile";
+			toolStripMenuItemImportSsmlFile.Size = new Size(192, 22);
+			toolStripMenuItemImportSsmlFile.Text = "Import SSML file";
+			toolStripMenuItemImportSsmlFile.Click += ToolStripMenuItemImportSsmlFile_Click;
+			toolStripMenuItemImportSsmlFile.MouseEnter += ToolStripMenuItemImportSsmlFile_MouseEnter;
+			toolStripMenuItemImportSsmlFile.MouseLeave += ClearStatusBar_Leave;
 			// 
 			// labelComputerVoice
 			// 
@@ -356,7 +405,7 @@
 			statusStrip.ShowItemToolTips = true;
 			statusStrip.Size = new Size(359, 22);
 			statusStrip.SizingGrip = false;
-			statusStrip.TabIndex = 16;
+			statusStrip.TabIndex = 15;
 			statusStrip.TabStop = true;
 			statusStrip.Text = "statusStrip";
 			// 
@@ -377,10 +426,10 @@
 			// 
 			buttonClearText.Image = Properties.Resources.delete;
 			buttonClearText.ImageAlign = ContentAlignment.MiddleRight;
-			buttonClearText.Location = new Point(189, 314);
+			buttonClearText.Location = new Point(231, 12);
 			buttonClearText.Name = "buttonClearText";
 			buttonClearText.Size = new Size(116, 27);
-			buttonClearText.TabIndex = 11;
+			buttonClearText.TabIndex = 1;
 			buttonClearText.Text = "Clear text";
 			buttonClearText.TextImageRelation = TextImageRelation.ImageBeforeText;
 			buttonClearText.UseVisualStyleBackColor = true;
@@ -410,12 +459,12 @@
 			AccessibleDescription = "This is the application window.";
 			AccessibleName = "application window";
 			AccessibleRole = AccessibleRole.Window;
+			AllowDrop = true;
 			AutoScaleDimensions = new SizeF(7F, 15F);
 			AutoScaleMode = AutoScaleMode.Font;
 			ClientSize = new Size(359, 417);
+			Controls.Add(buttonImport);
 			Controls.Add(checkBoxEnableSsmlMode);
-			Controls.Add(buttonSpeakTextFile);
-			Controls.Add(buttonPlaySsmlFile);
 			Controls.Add(buttonSaveAsWavFile);
 			Controls.Add(buttonClearText);
 			Controls.Add(statusStrip);
@@ -439,6 +488,7 @@
 			Load += MainForm_Load;
 			((System.ComponentModel.ISupportInitialize)trackBarVolume).EndInit();
 			((System.ComponentModel.ISupportInitialize)trackBarSpeechRate).EndInit();
+			contextMenuStripImportSource.ResumeLayout(false);
 			statusStrip.ResumeLayout(false);
 			statusStrip.PerformLayout();
 			ResumeLayout(false);
@@ -464,10 +514,13 @@
 		private Button buttonClearText;
 		private Button buttonSaveAsWavFile;
 		private SaveFileDialog saveFileDialogWaveFile;
-        private Button buttonPlaySsmlFile;
         private OpenFileDialog openFileDialogTextFile;
-		private Button buttonSpeakTextFile;
 		private OpenFileDialog openFileDialogSsmlFile;
 		private CheckBox checkBoxEnableSsmlMode;
+		private Button buttonImport;
+		private ContextMenuStrip contextMenuStripImportSource;
+		private ToolStripMenuItem toolStripMenuItemImportFromClipboard;
+		private ToolStripMenuItem toolStripMenuItemImportTextFile;
+		private ToolStripMenuItem toolStripMenuItemImportSsmlFile;
 	}
 }
