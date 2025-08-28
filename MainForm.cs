@@ -136,8 +136,16 @@ namespace TextSpeecher
 		{
 			try
 			{
-				return Clipboard.ContainsText() ? Clipboard.GetText() : null;
-			}
+                if (Clipboard.ContainsText())
+                {
+                    return (string?)Clipboard.GetText();
+                }
+                else
+                {
+                    _ = MessageBox.Show(text: "No text in clipboard.", caption: "Warning", buttons: MessageBoxButtons.OK, icon: MessageBoxIcon.Warning);
+                    return null;
+                }
+            }
 			catch (Exception ex)
 			{
 				// If the clipboard is not accessible
